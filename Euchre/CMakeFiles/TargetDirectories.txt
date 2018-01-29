@@ -1,3 +1,0 @@
-/home/garrett/McDonnell-OOP/Euchre/CMakeFiles/rebuild_cache.dir
-/home/garrett/McDonnell-OOP/Euchre/CMakeFiles/edit_cache.dir
-/home/garrett/McDonnell-OOP/Euchre/CMakeFiles/Euchre.dir
