@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/garrett/McDonnell-OOP/Euchre/card.hpp
+
+/home/garrett/McDonnell-OOP/Euchre/main.cpp
+iostream
+-
+card.hpp
+/home/garrett/McDonnell-OOP/Euchre/card.hpp
+ctime
+-
+cmath
+-
+cstdlib
+-
+

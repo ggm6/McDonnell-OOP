@@ -725,12 +725,14 @@ rs_read_window(int inf, WINDOW *win)
     return(READSTAT);
 }
 
+/*
 struct delayed_action {
     int d_type;
     int (*d_func)();
     int d_arg;
     int d_time;
 };
+*/
 
 rs_write_daemons(FILE *savef, struct delayed_action *d_list,int count)
 {

@@ -8,11 +8,14 @@
 #include "curses.h"
 #include "rogue.h"
 
+/*
 #define EMPTY 0
 #define DAEMON -1
 #define MAXDAEMONS 20
 
 #define _X_ { EMPTY }
+
+
 
 struct delayed_action {
     int d_type;
@@ -23,6 +26,7 @@ struct delayed_action {
     _X_, _X_, _X_, _X_, _X_, _X_, _X_, _X_, _X_, _X_,
     _X_, _X_, _X_, _X_, _X_, _X_, _X_, _X_, _X_, _X_, 
 };
+* */
 
 /*
  * d_slot:

@@ -11,7 +11,7 @@ using std::ostream;
 struct myString
 {
     char *phrase;
-    int len=0;
+    int len;
 
     myString();
     myString(const char* msg);
@@ -58,7 +58,8 @@ int main()
     if (x<"bro")
         cout << "dumb";
     else
-        cout << "dumb dumb";
+        cout << "dumb dumb" << endl;
+    cout << x << ' ' << y << ' ' << z;
 }
 
 myString::myString() : phrase(nullptr), len(0)
@@ -242,7 +243,7 @@ bool myString::operator < (const char* msg)
         i++;
     }
     int x=0;
-    while (x<=i)
+    while (x<i)
     {
         if (phrase[x]<t[x])
             return true;
