@@ -5,3 +5,6 @@
 
 4/26
 - Now compiling in C++ using G++.  Going through each function and putting parameters between the parantheses in function definitions.  I often have to put a declaration of the function in each individual file that calls it in order to make it compile.  Quick fix was done on macros for function definitions of "attach" and "detach", thanks to Dr. Sutton.  Overall technique so far: compile in linux terminal using make, find first error, find file to locate the origin of that error, completely fix that file until it compiles on its own, which requires fixing any functions in other files that that file calls.
+
+4/29
+- All functions have been converted to modern C++ as far as paramters and return types are concerned.
