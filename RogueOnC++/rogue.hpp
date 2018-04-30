@@ -7,7 +7,7 @@
 void msg(const char *fmt, ...);
 void addmsg(const char *fmt, ...);
 void endmsg();
-void doadd(char *fmt, va_list ap);
+void doadd(const char *fmt, va_list ap);
 bool step_ok(char ch);
 char readchar();
 void wait_for(char ch);
@@ -533,12 +533,12 @@ char *getenv(), *tr_name(), *new_var();
 char *charge_str(register struct object *obj),*vowelstr(register char *str), *inv_name(register struct object *obj, register bool drop), *strcat();
 char *ctime(), *num(register int n1, register int n2), *ring_num(register struct object *obj);
 
-struct room *roomin();
+struct room * roomin(register coord *cp);
 
 coord *rndmove();
 
-void auto_save(), endit(), quit(), tstp(), checkout();
-int nohaste(), doctor(), runners(), swander();
+void auto_save(), endit(), quit(), tstp(), checkout(), runners();
+int nohaste(), doctor(), swander();
 int unconfuse(), unsee(), rollwand(), stomach(), sight();
 
 struct trap *trap_at();

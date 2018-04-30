@@ -183,9 +183,7 @@ picked_up:
  * inventory:
  *	list what is in the pack
  */
-inventory(list, type)
-struct linked_list *list;
-int type;
+bool inventory(struct linked_list *list, int type)
 {
     register struct object *obj;
     register char ch;
@@ -262,8 +260,7 @@ int type;
  * pick_up:
  *	Add something to characters pack.
  */
-pick_up(ch)
-char ch;
+void pick_up(char ch)
 {
     switch(ch)
     {
@@ -289,7 +286,7 @@ char ch;
  * picky_inven:
  *	Allow player to inventory a single item
  */
-picky_inven()
+void picky_inven()
 {
     register struct linked_list *item;
     register char ch, mch;
@@ -376,7 +373,7 @@ struct linked_list * get_item(const char *purpose, int type)
     return NULL;
 }
 
-pack_char(register struct object *obj)
+char pack_char(register struct object *obj)
 {
     register struct linked_list *item;
     register char c;

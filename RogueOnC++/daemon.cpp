@@ -14,24 +14,13 @@
 
 #define _X_ { EMPTY }
 
-// Commented out by Garrett
-/*
-extern struct delayed_action {
-    int d_type;
-    int (*d_func)();
-    int d_arg;
-    int d_time;
-} d_list[MAXDAEMONS] = {
-    _X_, _X_, _X_, _X_, _X_, _X_, _X_, _X_, _X_, _X_,
-    _X_, _X_, _X_, _X_, _X_, _X_, _X_, _X_, _X_, _X_, 
-};
-
+void do_daemons(register int flag);
+void do_fuses(register int flag);
 
  * d_slot:
  *	Find an empty slot in the daemon/fuse list
  */
-struct delayed_action *
-d_slot()
+struct delayed_action * d_slot()
 {
     register int i;
     register struct delayed_action *dev;
@@ -48,9 +37,7 @@ d_slot()
  *	Find a particular slot in the table
  */
 
-struct delayed_action *
-find_slot(func)
-register int (*func)();
+struct delayed_action * find_slot(register int (*func)())
 {
     register int i;
     register struct delayed_action *dev;
@@ -66,8 +53,7 @@ register int (*func)();
  *	Start a daemon, takes a function.
  */
 
-daemon(func, arg, type)
-int (*func)(), arg, type;
+void daemon(int (*func)(), arg, type)
 {
     register struct delayed_action *dev;
 
@@ -83,8 +69,7 @@ int (*func)(), arg, type;
  *	Remove a daemon from the list
  */
 
-kill_daemon(func)
-int (*func)();
+void kill_daemon(int (*func)())
 {
     register struct delayed_action *dev;
 
@@ -102,8 +87,7 @@ int (*func)();
  *	passing the argument to the function.
  */
 
-do_daemons(flag)
-register int flag;
+void do_daemons(register int flag)
 {
     register struct delayed_action *dev;
 
@@ -123,8 +107,7 @@ register int flag;
  *	Start a fuse to go off in a certain number of turns
  */
 
-fuse(func, arg, time, type)
-int (*func)(), arg, time, type;
+void fuse(int (*func)(), arg, time, type)
 {
     register struct delayed_action *wire;
 
@@ -140,9 +123,7 @@ int (*func)(), arg, time, type;
  *	Increase the time until a fuse goes off
  */
 
-lengthen(func, xtime)
-int (*func)();
-int xtime;
+void lengthen(int (*func)(), int xtime)
 {
     register struct delayed_action *wire;
 
@@ -170,8 +151,7 @@ void extinguish(int (*func)())
  *	Decrement counters and start needed fuses
  */
 
-do_fuses(flag)
-register int flag;
+void do_fuses(register int flag)
 {
     register struct delayed_action *wire;
 

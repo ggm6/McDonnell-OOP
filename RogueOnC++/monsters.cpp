@@ -20,8 +20,7 @@ char wand_mons[27] = "KJBSH AOZG CRQ Y W IXU V  ";
  *	the meaner the monster.
  */
 
-randmonster(wander)
-bool wander;
+char randmonster(bool wander)
 {
     register int d;
     register char *mons;
@@ -43,10 +42,7 @@ bool wander;
  *	Pick a new monster and add it to the list
  */
 
-new_monster(item, type, cp)
-struct linked_list *item;
-char type;
-register coord *cp;
+void new_monster(struct linked_list *item, char type, register coord *cp)
 {
     register struct thing *tp;
     register struct monster *mp;
@@ -97,7 +93,7 @@ register coord *cp;
  *	A wandering monster has awakened and is headed for the player
  */
 
-wanderer()
+void wanderer()
 {
     register int i, ch;
     register struct room *rp, *hr = roomin(&hero);
@@ -131,9 +127,7 @@ wanderer()
 /*
  * what to do when the hero steps next to a monster
  */
-struct linked_list *
-wake_monster(y, x)
-int y, x;
+struct linked_list * wake_monster(int y, x)
 {
     register struct thing *tp;
     register struct linked_list *it;
@@ -188,7 +182,7 @@ int y, x;
     return it;
 }
 
-genocide()
+void genocide()
 {
     register struct linked_list *ip;
     register struct thing *mp;

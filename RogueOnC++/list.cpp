@@ -29,7 +29,7 @@ void detach(register struct linked_list **list, *item)
  *	add an item to the head of a list
  */
 
-_attach(register struct linked_list **list, *item)
+void _attach(register struct linked_list **list, *item)
 {
     if (*list != NULL)
     {
@@ -51,8 +51,7 @@ _attach(register struct linked_list **list, *item)
  *	Throw the whole blamed thing away
  */
 
-_free_list(ptr)
-register struct linked_list **ptr;
+void _free_list(register struct linked_list **ptr)
 {
     register struct linked_list *item;
 
@@ -69,8 +68,7 @@ register struct linked_list **ptr;
  *	free up an item
  */
 
-discard(item)
-register struct linked_list *item;
+void discard(register struct linked_list *item)
 {
     total -= 2;
     FREE(item->l_data);
@@ -95,9 +93,7 @@ struct linked_list * new_item(int size)
     return item;
 }
 
-char *
-new_var(size)
-int size;
+char * new_var(int size)
 {
     register char *space = ALLOC(size);
 

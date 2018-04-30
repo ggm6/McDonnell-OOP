@@ -19,8 +19,7 @@ coord nh;
  *	Start the hero running
  */
 
-do_run(ch)
-char ch;
+void do_run(char ch)
 {
     running = TRUE;
     after = FALSE;
@@ -33,8 +32,7 @@ char ch;
  * consequences (fighting, picking up, etc.)
  */
 
-do_move(dy, dx)
-int dy, dx;
+void do_move(int dy, dx)
 {
     register char ch;
 
@@ -198,8 +196,7 @@ void light(coord *cp)
  *	returns what a certain thing will display as to the un-initiated
  */
 
-show(y, x)
-register int y, x;
+char show(register int y, x)
 {
     register char ch = winat(y, x);
     register struct linked_list *it;
@@ -228,8 +225,7 @@ register int y, x;
  *	The guy stepped on a trap.... Make him pay.
  */
 
-be_trapped(tc)
-register coord *tc;
+char be_trapped(register coord *tc)
 {
     register struct trap *tp;
     register char ch;
@@ -303,9 +299,7 @@ register coord *tc;
  *	find the trap at (y,x) on screen.
  */
 
-struct trap *
-trap_at(y, x)
-register int y, x;
+struct trap * trap_at(register int y, x)
 {
     register struct trap *tp, *ep;
 
@@ -326,9 +320,7 @@ register int y, x;
  *	move in a random direction if the monster/person is confused
  */
 
-coord *
-rndmove(who)
-struct thing *who;
+coord * rndmove(struct thing *who)
 {
     register int x, y;
     register char ch;

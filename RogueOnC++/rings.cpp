@@ -8,7 +8,7 @@
  * @(#)rings.c	3.17 (Berkeley) 6/15/81
  */
 
-ring_on()
+void ring_on()
 {
     register struct object *obj;
     register struct linked_list *item;
@@ -95,7 +95,7 @@ ring_on()
     }
 }
 
-ring_off()
+void ring_off()
 {
     register int ring;
     register struct object *obj;
@@ -126,7 +126,7 @@ ring_off()
 	msg("Was wearing %s", inv_name(obj, TRUE));
 }
 
-gethand()
+int gethand()
 {
     register int c;
 
@@ -153,8 +153,7 @@ gethand()
 /*
  * how much food does this ring use up?
  */
-ring_eat(hand)
-register int hand;
+int ring_eat(register int hand)
 {
     if (cur_ring[hand] == NULL)
 	return 0;

@@ -50,8 +50,7 @@ static struct init_weps {
  *	Fire a missile in a given direction
  */
 
-missile(ydelta, xdelta)
-int ydelta, xdelta;
+void missile(int ydelta, int xdelta)
 {
     register struct object *obj;
     register struct linked_list *item, *nitem;
@@ -100,9 +99,7 @@ int ydelta, xdelta;
  * do the actual motion on the screen done by an object traveling
  * across the room
  */
-do_motion(obj, ydelta, xdelta)
-register struct object *obj;
-register int ydelta, xdelta;
+void do_motion(register struct object *obj, register int ydelta, int xdelta)
 {
     /*
      * Come fly with us ...
@@ -147,9 +144,7 @@ register int ydelta, xdelta;
  *	Drop an item someplace around here.
  */
 
-fall(item, pr)
-register struct linked_list *item;
-bool pr;
+void fall(register struct linked_list *item, bool pr)
 {
     register struct object *obj;
     register struct room *rp;
@@ -200,9 +195,7 @@ void init_weapon(register struct object *weap, char type)
  * Does the missile hit the monster
  */
 
-hit_monster(y, x, obj)
-register int y, x;
-struct object *obj;
+bool hit_monster(register int y, int x, struct object *obj)
 {
     static coord mp;
 
@@ -235,7 +228,7 @@ char * num(register int n1, n2)
  *	Pull out a certain weapon
  */
 
-wield()
+void wield()
 {
     register struct linked_list *item;
     register struct object *obj, *oweapon;
@@ -274,9 +267,7 @@ bad:
 /*
  * pick a random position around the give (y, x) coordinates
  */
-fallpos(pos, newpos, passages)
-register coord *pos, *newpos;
-register bool passages;
+bool fallpos(register coord *pos, coord *newpos, register bool passages)
 {
     register int y, x, cnt, ch;
 

@@ -39,8 +39,7 @@ char	*killname();
  *	Do something really fun when he dies
  */
 
-death(monst)
-register char monst;
+void death(register char monst)
 {
     register char **dp = rip, *killer;
     register struct tm *lt;
@@ -75,8 +74,7 @@ register char monst;
  */
 
 /* VARARGS2 */
-score(amount, flags, monst)
-char monst;
+void score(amount, flags, char monst)
 {
     static struct sc_ent {
 	int sc_score;
@@ -212,7 +210,7 @@ char monst;
     fclose(outf);
 }
 
-total_winner()
+void total_winner()
 {
     register struct linked_list *item;
     register struct object *obj;
@@ -319,9 +317,7 @@ total_winner()
     exit(0);
 }
 
-char *
-killname(monst)
-register char monst;
+char * killname(register char monst)
 {
     if (isupper(monst))
 	return monsters[monst-'A'].m_name;

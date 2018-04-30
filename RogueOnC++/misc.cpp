@@ -13,9 +13,7 @@
  *	print the name of a trap
  */
 
-char *
-tr_name(ch)
-char ch;
+char * tr_name(char ch)
 {
     register char *s;
 
@@ -42,8 +40,7 @@ char ch;
  *	A quick glance all around the player
  */
 
-look(wakeup)
-bool wakeup;
+void look(bool wakeup)
 {
     register int x, y;
     register char ch;
@@ -167,8 +164,7 @@ bool wakeup;
  *	Figure out what a secret door looks like.
  */
 
-secretdoor(y, x)
-register int y, x;
+char secretdoor(register int y, x)
 {
     register int i;
     register struct room *rp;
@@ -214,7 +210,7 @@ struct linked_list * find_obj(register int y, int x)
  *	She wants to eat something, so let her try
  */
 
-eat()
+void eat()
 {
     register struct linked_list *item;
     register struct object *obj;
@@ -312,8 +308,7 @@ void chg_str(register int amt)
  *	add a haste to the player
  */
 
-add_haste(potion)
-bool potion;
+void add_haste(bool potion)
 {
     if (on(player, ISHASTE))
     {
@@ -334,7 +329,7 @@ bool potion;
  *	aggravate all the monsters on this level
  */
 
-aggravate()
+void aggravate()
 {
     register struct linked_list *mi;
 
@@ -363,8 +358,7 @@ char * vowelstr(register char *str)
 /* 
  * see if the object is one of the currently used items
  */
-is_current(obj)
-register struct object *obj;
+bool is_current(register struct object *obj)
 {
     if (obj == NULL)
 	return FALSE;
@@ -380,7 +374,7 @@ register struct object *obj;
 /*
  * set up the direction co_ordinate for use in varios "prefix" commands
  */
-get_dir()
+bool get_dir()
 {
     register char *prompt;
     register bool gotit;

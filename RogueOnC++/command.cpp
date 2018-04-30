@@ -17,7 +17,7 @@
 
 char countch = FALSE, direction = FALSE, newcount = FALSE;
 
-command()
+void command()
 {
      char ch;
      int ntimes = 1;			/* Number of player moves */
@@ -308,8 +308,7 @@ command()
  *	Have player make certain, then exit.
  */
 
-void
-quit(int p)
+void quit(int p)
 {
     /*
      * Reset the signal in case we got here via an interrupt
@@ -390,7 +389,7 @@ search()
  *	Give single character help, or the whole mess if he wants it
  */
 
-help()
+void help()
 {
      struct h_list *strp = helpstr;
      char helpch;
@@ -449,7 +448,7 @@ help()
  *	Tell the player what a certain thing is.
  */
 
-identify()
+void identify()
 {
      char ch, *str;
 
@@ -494,7 +493,7 @@ identify()
  *	He wants to go down a level
  */
 
-d_level()
+void d_level()
 {
     if (winat(hero.y, hero.x) != STAIRS)
 	msg("I see no way down.");
@@ -510,7 +509,7 @@ d_level()
  *	He wants to go up a level
  */
 
-u_level()
+void u_level()
 {
     if (winat(hero.y, hero.x) == STAIRS)
     {
@@ -531,7 +530,7 @@ u_level()
  * Let him escape for a while
  */
 
-shell()
+void shell()
 {
 // GARRETT CHANGE: "register" is now redundant and has been taken out, as compilers are so good at code optimization that they can handle this themselves
     int pid;
@@ -585,7 +584,7 @@ shell()
 /*
  * allow a user to call a potion, scroll, or ring something
  */
-call()
+void call()
 {
      struct object *obj;
      struct linked_list *item;

@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include "rogue.hpp"
 
-quaff()
+void quaff()
 {
     register struct object *obj;
     register struct linked_list *item, *titem;

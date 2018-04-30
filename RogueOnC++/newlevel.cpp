@@ -8,7 +8,7 @@
  * @(#)new_level.c	3.7 (Berkeley) 6/2/81
  */
 
-new_level()
+void new_level()
 {
     register int rm, i;
     register char ch;
@@ -82,7 +82,7 @@ new_level()
  * Pick a room that is really there
  */
 
-rnd_room()
+int rnd_room()
 {
     register int rm;
 
@@ -98,7 +98,7 @@ rnd_room()
  *	put potions and scrolls on this level
  */
 
-put_things()
+void put_things()
 {
     register int i;
     register struct linked_list *item;

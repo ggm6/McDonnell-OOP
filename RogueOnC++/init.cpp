@@ -102,7 +102,7 @@ struct monster monsters[26] = {
  *	roll up the rogue
  */
 
-init_player()
+void init_player()
 {
     pstats.s_lvl = 1;
     pstats.s_exp = 0L;
@@ -353,7 +353,7 @@ int a_chances[MAXARMORS] = {
  * init_things
  *	Initialize the probabilities for types of things
  */
-init_things()
+void init_things()
 {
     register struct magic_item *mp;
 
@@ -367,7 +367,7 @@ init_things()
  *	Initialize the potion color scheme for this time
  */
 
-init_colors()
+void init_colors()
 {
     register int i;
     register char *str;
@@ -392,7 +392,7 @@ init_colors()
  *	Generate the names of the various scrolls
  */
 
-init_names()
+void init_names()
 {
     register int nsyl;
     register char *cp, *sp;
@@ -429,7 +429,7 @@ init_names()
  *	Initialize the ring stone setting scheme for this time
  */
 
-init_stones()
+void init_stones()
 {
     register int i;
     register char *str;
@@ -454,7 +454,7 @@ init_stones()
  *	Initialize the construction materials for wands and staffs
  */
 
-init_materials()
+void init_materials()
 {
     register int i;
     register char *str;
@@ -485,10 +485,7 @@ init_materials()
     badcheck("sticks", ws_magic, MAXSTICKS);
 }
 
-badcheck(name, magic, bound)
-char *name;
-register struct magic_item *magic;
-register int bound;
+badcheck(char *name, register struct magic_item *magic, register int bound)
 {
     register struct magic_item *end;
 

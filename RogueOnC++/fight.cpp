@@ -8,6 +8,8 @@
 #include <ctype.h>
 #include "rogue.hpp"
 
+int attack(register struct thing *mp);
+
 long e_levels[] = {
     10L,20L,40L,80L,160L,320L,640L,1280L,2560L,5120L,10240L,20480L,
     40920L, 81920L, 163840L, 327680L, 655360L, 1310720L, 2621440L, 0L };
@@ -17,11 +19,7 @@ long e_levels[] = {
  *	The player attacks the monster.
  */
 
-fight(mp, mn, weap, thrown)
-register coord *mp;
-char mn;
-struct object *weap;
-bool thrown;
+bool fight(register coord *mp, char mn, struct object *weap, bool thrown)
 {
     register struct thing *tp;
     register struct linked_list *item;
@@ -89,8 +87,7 @@ bool thrown;
  *	The monster attacks the player
  */
 
-attack(mp)
-register struct thing *mp;
+int attack(register struct thing *mp)
 {
     register char *mname;
 
@@ -290,8 +287,7 @@ register struct thing *mp;
  *	returns true if the swing hits
  */
 
-swing(at_lvl, op_arm, wplus)
-int at_lvl, op_arm, wplus;
+bool swing(int at_lvl, op_arm, wplus)
 {
     register int res = rnd(20)+1;
     register int need = (21-at_lvl)-op_arm;
@@ -304,7 +300,7 @@ int at_lvl, op_arm, wplus;
  *	Check to see if the guy has gone up a level.
  */
 
-check_level()
+void check_level()
 {
     register int i, add;
 
@@ -328,10 +324,7 @@ check_level()
  *	Roll several attacks
  */
 
-roll_em(att, def, weap, hurl)
-struct stats *att, *def;
-struct object *weap;
-bool hurl;
+bool roll_em(struct stats *att, *def, struct object *weap, bool hurl)
 {
     register char *cp;
     register int ndice, nsides, def_arm;
@@ -422,10 +415,7 @@ bool hurl;
  *	The print name of a combatant
  */
 
-char *
-prname(who, upper)
-register char *who;
-bool upper;
+char * prname(register char *who, bool upper)
 {
     static char tbuf[80];
 
@@ -449,8 +439,7 @@ bool upper;
  *	Print a message to indicate a succesful hit
  */
 
-hit(er, ee)
-register char *er, *ee;
+void hit(register char *er, *ee)
 {
     register char *s;
 
@@ -476,8 +465,7 @@ register char *er, *ee;
  *	Print a message to indicate a poor swing
  */
 
-miss(er, ee)
-register char *er, *ee;
+void miss(register char *er, *ee)
 {
     register char *s;
 
@@ -499,9 +487,7 @@ register char *er, *ee;
  * save_throw:
  *	See if a creature save against something
  */
-save_throw(which, tp)
-int which;
-struct thing *tp;
+bool save_throw(int which, struct thing *tp)
 {
     register int need;
 
@@ -513,8 +499,7 @@ struct thing *tp;
  *	See if he saves against various nasty things
  */
 
-save(which)
-int which;
+bool save(int which)
 {
     return save_throw(which, &player);
 }
@@ -524,8 +509,7 @@ int which;
  *	compute bonus/penalties for strength on the "to hit" roll
  */
 
-str_plus(str)
-register str_t *str;
+int str_plus(register str_t *str)
 {
     if (str->st_str == 18)
     {
@@ -546,8 +530,7 @@ register str_t *str;
  *	compute additional damage done for exceptionally high or low strength
  */
 
- add_dam(str)
- register str_t *str;
+int add_dam( register str_t *str)
  {
     if (str->st_str == 18)
     {
@@ -573,7 +556,7 @@ register str_t *str;
  *	The guy just magically went up a level.
  */
 
-raise_level()
+void raise_level()
 {
     pstats.s_exp = e_levels[pstats.s_lvl-1] + 1L;
     check_level();
@@ -584,9 +567,7 @@ raise_level()
  *	A missile hits a monster
  */
 
-thunk(weap, mname)
-register struct object *weap;
-register char *mname;
+void thunk(register struct object *weap, register char *mname)
 {
     if (weap->o_type == WEAPON)
 	msg("The %s hits the %s", w_names[weap->o_which], mname);
@@ -599,9 +580,7 @@ register char *mname;
  *	A missile misses a monster
  */
 
-bounce(weap, mname)
-register struct object *weap;
-register char *mname;
+void bounce(register struct object *weap, register char *mname)
 {
     if (weap->o_type == WEAPON)
 	msg("The %s misses the %s", w_names[weap->o_which], mname);
@@ -612,9 +591,7 @@ register char *mname;
 /*
  * remove a monster from the screen
  */
-remove_monster(mp, item)
-register coord *mp;
-register struct linked_list *item;
+void remove_monster(register coord *mp, register struct linked_list *item)
 {
     mvwaddch(mw, mp->y, mp->x, ' ');
     mvwaddch(cw, mp->y, mp->x, ((struct thing *) ldata(item))->t_oldch);
@@ -627,8 +604,7 @@ register struct linked_list *item;
  *	Returns true if an object radiates magic
  */
 
-is_magic(obj)
-register struct object *obj;
+bool is_magic(register struct object *obj)
 {
     switch (obj->o_type)
     {
@@ -651,9 +627,7 @@ register struct object *obj;
  *	Called to put a monster to death
  */
 
-killed(item, pr)
-register struct linked_list *item;
-bool pr;
+void killed(register struct linked_list *item, bool pr)
 {
     register struct thing *tp;
     register struct linked_list *pitem, *nexti;

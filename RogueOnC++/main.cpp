@@ -22,9 +22,7 @@ WINDOW *cw;                              /* Window that the player sees */
 WINDOW *hw;                              /* Used for the help command */
 WINDOW *mw;                              /* Used to store mosnters */
 
-main(argc, argv, envp)
-char **argv;
-char **envp;
+main(argc, char **argv, char **envp)
 {
     register char *env;
     register struct passwd *pw;
@@ -218,8 +216,7 @@ char **envp;
  *	Exit the program abnormally.
  */
 
-void
-endit(int p)
+void endit(int p)
 {
     fatal("Ok, if you want to exit that badly, I'll have to allow it\n");
 }
@@ -229,8 +226,7 @@ endit(int p)
  *	Exit the program, printing a message.
  */
 
-fatal(s)
-char *s;
+void fatal(char *s)
 {
     clear();
     move(LINES-2, 0);
@@ -255,8 +251,7 @@ int rnd(register int range)
  *	roll a number of dice
  */
 
-roll(number, sides)
-register int number, sides;
+int roll(register int number, sides)
 {
     register int dtotal = 0;
 
@@ -269,8 +264,7 @@ register int number, sides;
  * handle stop and start signals
  */
 
-void
-tstp(int p)
+void tstp(int p)
 {
     mvcur(0, COLS - 1, LINES - 1, 0);
     endwin();
@@ -335,7 +329,7 @@ setup()
  * refreshing things and looking at the proper times.
  */
 
-playit()
+void playit()
 {
     register char *opts;
 
@@ -384,7 +378,7 @@ too_much()
 /*
  * see if a user is an author of the program
  */
-author()
+bool author()
 {
     switch (getuid())
     {
@@ -397,8 +391,7 @@ author()
 #endif
 
 #ifdef CHECKTIME
-void
-checkout(int p)
+void checkout(int p)
 {
     static char *msgs[] = {
 	"The load is too high to be playing.  Please leave in %d minutes",
@@ -431,9 +424,7 @@ checkout(int p)
  * checkout()'s version of msg.  If we are in the middle of a shell, do a
  * printf instead of a msg to avoid the refresh.
  */
-chmsg(fmt, arg)
-char *fmt;
-int arg;
+void chmsg(char *fmt, int arg)
 {
     if (in_shell)
     {
@@ -456,8 +447,7 @@ struct nlist avenrun[] =
     {0,0,0,0,0,0}
 };
 
-loadav(avg)
-register double *avg;
+int loadav(register double *avg)
 {
     register int kmem;
 	int av[3];
@@ -487,7 +477,7 @@ bad:
 #ifdef __CYGWIN__
 #include <utmp.hpp>
 
-ucount()
+int ucount()
 {
     struct utmp *up=NULL;
     int count=0;
@@ -507,7 +497,7 @@ ucount()
 #else
 #include <utmpx.h>
 
-ucount()
+int ucount()
 {
     struct utmpx *up=NULL;
     int count=0;

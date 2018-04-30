@@ -7,7 +7,7 @@
 #include "curses.h"
 #include "rogue.hpp"
 
-do_rooms()
+void do_rooms()
 {
     register int i;
     register struct room *rp;
@@ -107,8 +107,7 @@ do_rooms()
  * Draw a box around a room
  */
 
-draw_room(rp)
-register struct room *rp;
+void draw_room(register struct room *rp)
 {
     register int j, k;
 
@@ -152,8 +151,7 @@ register int cnt;
  *	draw a vertical line
  */
 
-vert(cnt)
-register int cnt;
+void vert(register int cnt)
 {
     register int x, y;
 
@@ -170,9 +168,7 @@ register int cnt;
  *	pick a random spot in a room
  */
 
-rnd_pos(rp, cp)
-register struct room *rp;
-register coord *cp;
+rnd_pos(register struct room *rp, register coord *cp)
 {
     cp->x = rp->r_pos.x + rnd(rp->r_max.x-2) + 1;
     cp->y = rp->r_pos.y + rnd(rp->r_max.y-2) + 1;

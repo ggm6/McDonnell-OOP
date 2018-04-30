@@ -10,15 +10,18 @@
 #include <termios.h>
 #include <ctype.h>
 #include "rogue.hpp"
+#include <string.h>
 
 #define	NUM_OPTS	(sizeof optlist / sizeof (OPTION))
+
+void strucpy(register char *s1, char *s2, register int len);
 
 /*
  * description of an option and what to do with it
  */
 struct optstruct {
-    char	*o_name;	/* option name */
-    char	*o_prompt;	/* prompt for interactive entry */
+    const char	*o_name;	/* option name */
+    const char	*o_prompt;	/* prompt for interactive entry */
     int		*o_opt;		/* pointer to thing to set */
     int		(*o_putfunc)();	/* function to print value */
     int		(*o_getfunc)();	/* function to get value interactively */
@@ -26,7 +29,7 @@ struct optstruct {
 
 typedef struct optstruct	OPTION;
 
-int	put_bool(), get_bool(), put_str(), get_str();
+int	get_bool(), get_str(), put_bool(), put_str();
 
 OPTION	optlist[] = {
     {"terse",	 "Terse output: ",
@@ -50,7 +53,7 @@ OPTION	optlist[] = {
 /*
  * print and then set options from the terminal
  */
-option()
+void option()
 {
     register OPTION	*op;
     register int	retval;
@@ -101,8 +104,7 @@ option()
 /*
  * put out a boolean
  */
-put_bool(b)
-bool	*b;
+int put_bool(bool	*b)
 {
     waddstr(hw, *b ? "True" : "False");
 }
@@ -110,8 +112,7 @@ bool	*b;
 /*
  * put out a string
  */
-put_str(str)
-char *str;
+int put_str(char *str)
 {
     waddstr(hw, str);
 }
@@ -120,9 +121,7 @@ char *str;
  * allow changing a boolean option and print it out
  */
 
-get_bool(bp, win)
-bool *bp;
-WINDOW *win;
+int get_bool(bool *bp, WINDOW *win)
 {
     register int oy, ox;
     register bool op_bad;
@@ -168,9 +167,7 @@ WINDOW *win;
 /*
  * set a string option
  */
-get_str(opt, win)
-register char *opt;
-WINDOW *win;
+int get_str(register char *opt, WINDOW *win)
 {
     register char *sp;
     register int c, oy, ox;
@@ -243,8 +240,7 @@ WINDOW *win;
  * or the end of the entire option string.
  */
 
-parse_opts(str)
-register char *str;
+void parse_opts(register char *str)
 {
     register char *sp;
     register OPTION *op;
@@ -314,9 +310,7 @@ register char *str;
 /*
  * copy string using unctrl for things
  */
-strucpy(s1, s2, len)
-register char *s1, *s2;
-register int len;
+void strucpy(register char *s1, char *s2, register int len)
 {
     register char *sp;
 

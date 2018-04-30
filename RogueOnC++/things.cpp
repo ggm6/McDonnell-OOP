@@ -259,8 +259,7 @@ bool dropcheck(register struct object *op)
 /*
  * return a new thing
  */
-struct linked_list *
-new_thing()
+struct linked_list * new_thing()
 {
     register struct linked_list *item;
     register struct object *cur;
