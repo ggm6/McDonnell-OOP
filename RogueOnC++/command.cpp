@@ -9,6 +9,9 @@
 #include <ctype.h>
 #include <signal.h>
 #include "rogue.hpp"
+#include <unistd.h>  // Added to allow uses of fork() and uid functions
+#include <sys/wait.h>  // Allows "wait" function
+#include <string.h>
 
 /*
  * command:
@@ -322,7 +325,7 @@ void quit(int p)
 	clear();
 	move(LINES-1, 0);
 	draw(stdscr);
-	score(purse, 1);
+	score(purse, 1, ' ');
 	exit(0);
     }
     else
@@ -342,7 +345,7 @@ void quit(int p)
  *	Player gropes about him to find hidden things.
  */
 
-search()
+void search()
 {
      int x, y;
      char ch;
@@ -643,7 +646,7 @@ void call()
     strcpy(prbuf, elsewise);
     if (get_str(prbuf, cw) == NORM)
     {
-	guess[obj->o_which] = malloc((unsigned int) strlen(prbuf) + 1);
+	guess[obj->o_which] = new char[strlen(prbuf)+1]; // Got rid of malloc to support C++'s "new"
 	strcpy(guess[obj->o_which], prbuf);
     }
 }

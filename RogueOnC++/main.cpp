@@ -43,7 +43,7 @@ main(argc, char **argv, char **envp)
     if (argc == 2 && strcmp(argv[1], "-s") == 0)
     {
 	waswizard = TRUE;
-	score(0, -1);
+	score(0, -1, '');
 	exit(0);
     }
     /*

@@ -29,8 +29,7 @@ void fix_stick(register struct object *cur)
     }
 }
 
-do_zap(gotdir)
-bool gotdir;
+void do_zap(bool gotdir)
 {
     register struct linked_list *item;
     register struct object *obj;
@@ -335,8 +334,7 @@ bool gotdir;
  *	Do drain hit points from player shtick
  */
 
-drain(ymin, ymax, xmin, xmax)
-int ymin, ymax, xmin, xmax;
+void drain(int ymin, int ymax, int xmin, int xmax)
 {
     register int i, j, count;
     register struct thing *ick;

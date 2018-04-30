@@ -11,7 +11,7 @@ using std::cout;
 
 void wear();
 void waste_time();
-void take_off(register struct object *obj);
+void take_off();
 bool dropcheck(register struct object *op);
 char pack_char(register struct object *obj);
 void do_daemons(register int flag);
@@ -59,9 +59,9 @@ void wear()
  *	Get the armor off of the players back
  */
 
-void take_off(register struct object *obj)
+void take_off()
 {
-
+	register struct object *obj;
     if ((obj = cur_armor) == NULL)
     {
 	if (terse)

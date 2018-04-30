@@ -32,7 +32,7 @@ void do_run(char ch)
  * consequences (fighting, picking up, etc.)
  */
 
-void do_move(int dy, dx)
+void do_move(int dy, int dx)
 {
     register char ch;
 
@@ -299,7 +299,7 @@ char be_trapped(register coord *tc)
  *	find the trap at (y,x) on screen.
  */
 
-struct trap * trap_at(register int y, x)
+struct trap * trap_at(register int y, int x)
 {
     register struct trap *tp, *ep;
 

@@ -74,7 +74,7 @@ void death(register char monst)
  */
 
 /* VARARGS2 */
-void score(amount, flags, char monst)
+void score(int amount, int flags, char monst)
 {
     static struct sc_ent {
 	int sc_score;

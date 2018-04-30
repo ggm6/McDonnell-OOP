@@ -3,7 +3,8 @@
 
 #include "curses.h"
 
-// GARRETT CHANGE: Function Prototypes added from io.cpp so that they are recognizable from other files
+
+// GARRETT CHANGE: Function Prototypes added so that they are recognizable from other files
 void msg(const char *fmt, ...);
 void addmsg(const char *fmt, ...);
 void endmsg();
@@ -14,6 +15,50 @@ void wait_for(char ch);
 void status();
 void flush_type();
 void show_win(WINDOW *scr, char *message);
+void do_daemons(register int flag);
+void do_fuses(register int flag);
+void look(bool wakeup);
+void shell();
+void do_move(int dy, int dx);
+void do_run(char ch);
+bool get_dir();
+void missile(int ydelta, int xdelta);
+bool inventory(struct linked_list *list, int type);
+void picky_inven();
+void drop();
+void quaff();
+void read_scroll();
+void eat();
+void wield();
+void wear();
+void take_off();
+void ring_on();
+void ring_off();
+void option();
+void call();
+void d_level();
+void u_level();
+void help();
+void identify();
+void search();
+void do_zap(bool gotdir);
+bool get_dir();
+bool save_game();
+bool passwd();
+void create_obj();
+void whatis();
+void new_level();
+int teleport();
+void add_pass();
+void raise_level();
+void init_weapon(register struct object *weap, char type);
+void add_pack(register struct linked_list *item, bool silent);
+void pick_up(char ch);
+int rnd(register int range);
+int teleport();
+void score(int amount, int flags, char monst);
+void total_winner();
+int get_str(register char *opt, WINDOW *win);
 
 /*
  * Rogue definitions and variable declarations
@@ -529,19 +574,19 @@ struct linked_list *find_mons(), *find_obj(register int y, int x), *get_item(con
 struct linked_list *new_thing(), *wake_monster();
 
 // GARRETT'S CHANGE: C does not use new as keyword, new is being used as a variable
-char *getenv(), *tr_name(), *new_var();
+char *getenv(), *tr_name(char ch), *new_var();
 char *charge_str(register struct object *obj),*vowelstr(register char *str), *inv_name(register struct object *obj, register bool drop), *strcat();
 char *ctime(), *num(register int n1, register int n2), *ring_num(register struct object *obj);
 
 struct room * roomin(register coord *cp);
 
-coord *rndmove();
+coord * rndmove(struct thing *who);
 
-void auto_save(), endit(), quit(), tstp(), checkout(), runners();
+void auto_save(), endit(int p), quit(int p), tstp(), checkout(), runners();
 int nohaste(), doctor(), swander();
 int unconfuse(), unsee(), rollwand(), stomach(), sight();
 
-struct trap *trap_at();
+struct trap *trap_at(int y, int x);
 
 extern struct termios terminal;
 
