@@ -45,7 +45,7 @@ int dnum;                                /* Dungeon number */
 char *s_names[MAXSCROLLS];               /* Names of the scrolls */
 char *p_colors[MAXPOTIONS];              /* Colors of the potions */
 char *r_stones[MAXRINGS];                /* Stone settings of the rings */
-char *a_names[MAXARMORS];                /* Names of armor types */
+//char *a_names[MAXARMORS];                /* Names of armor types */
 char *ws_made[MAXSTICKS];                /* What sticks are made of */
 char *s_guess[MAXSCROLLS];               /* Players guess at what scroll is */
 char *p_guess[MAXPOTIONS];               /* Players guess at what potion is */
@@ -485,7 +485,7 @@ void init_materials()
     badcheck("sticks", ws_magic, MAXSTICKS);
 }
 
-badcheck(char *name, register struct magic_item *magic, register int bound)
+void badcheck(char *name, register struct magic_item *magic, register int bound)
 {
     register struct magic_item *end;
 

@@ -127,7 +127,7 @@ void wanderer()
 /*
  * what to do when the hero steps next to a monster
  */
-struct linked_list * wake_monster(int y, x)
+struct linked_list * wake_monster(int y, int x)
 {
     register struct thing *tp;
     register struct linked_list *it;

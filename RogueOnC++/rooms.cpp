@@ -139,8 +139,7 @@ void draw_room(register struct room *rp)
  *	draw a horizontal line
  */
 
-horiz(cnt)
-register int cnt;
+void horiz(register int cnt)
 {
     while (cnt--)
 	addch('-');
@@ -168,7 +167,7 @@ void vert(register int cnt)
  *	pick a random spot in a room
  */
 
-rnd_pos(register struct room *rp, register coord *cp)
+void rnd_pos(register struct room *rp, register coord *cp)
 {
     cp->x = rp->r_pos.x + rnd(rp->r_max.x-2) + 1;
     cp->y = rp->r_pos.y + rnd(rp->r_max.y-2) + 1;

@@ -290,7 +290,7 @@ void read_scroll()
 	msg(terse ? "Call it: " : "What do you want to call it? ");
 	if (get_str(buf, cw) == NORM)
 	{
-	    s_guess[obj->o_which] = malloc((unsigned int) strlen(buf) + 1);
+	    s_guess[obj->o_which] = new char [strlen(buf) + 1];
 	    strcpy(s_guess[obj->o_which], buf);
 	}
     }

@@ -110,7 +110,7 @@ void quaff()
 		    th = (struct thing *) ldata(titem);
 		    for (pitem = th->t_pack; pitem != NULL; pitem = next(pitem))
 		    {
-			if (is_magic(ldata(pitem)))
+			if (is_magic((object*) ldata(pitem)))
 			{
 			    show = TRUE;
 			    mvwaddch(hw, th->t_pos.y, th->t_pos.x, MAGIC);
@@ -185,7 +185,7 @@ void quaff()
 	msg(terse ? "Call it: " : "What do you want to call it? ");
 	if (get_str(buf, cw) == NORM)
 	{
-	    p_guess[obj->o_which] = malloc((unsigned int) strlen(buf) + 1);
+	    p_guess[obj->o_which] = new char [strlen(buf) + 1];
 	    strcpy(p_guess[obj->o_which], buf);
 	}
     }

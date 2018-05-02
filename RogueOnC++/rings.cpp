@@ -88,7 +88,7 @@ void ring_on()
 	msg(terse ? "Call it: " : "What do you want to call it? ");
 	if (get_str(buf, cw) == NORM)
 	{
-	    r_guess[obj->o_which] = malloc((unsigned int) strlen(buf) + 1);
+	    r_guess[obj->o_which] = new char [strlen(buf) + 1];
 	    strcpy(r_guess[obj->o_which], buf);
 	}
 	msg("");

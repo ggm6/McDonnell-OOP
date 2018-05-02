@@ -7,9 +7,8 @@
 #include "curses.h"
 #include "rogue.hpp"
 
-void runners();
+int runners();
 int do_chase(register struct thing *th);
-void runto(register coord *runner, coord *spot);
 struct room * roomin(register coord *cp);
 bool chase(struct thing *tp, coord *ee);
 struct linked_list * find_mons(register int y, int x);
@@ -25,7 +24,7 @@ coord ch_ret;				/* Where chasing takes you */
  *	Make all the running monsters move.
  */
 
-void runners()
+int runners()
 {
     register struct linked_list *item;
     register struct thing *tp;

@@ -13,9 +13,9 @@
  *	print the name of a trap
  */
 
-char * tr_name(char ch)
+const char * tr_name(char ch)
 {
-    register char *s;
+    register const char *s;
 
     switch (ch)
     {
@@ -164,7 +164,7 @@ void look(bool wakeup)
  *	Figure out what a secret door looks like.
  */
 
-char secretdoor(register int y, x)
+char secretdoor(register int y, int x)
 {
     register int i;
     register struct room *rp;

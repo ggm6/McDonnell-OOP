@@ -14,7 +14,7 @@
  *	Takes an item out of whatever linked list it might be in
  */
 
-void detach(register struct linked_list **list, *item)
+void _detach(register struct linked_list **list, register struct linked_list *item)
 {
     if (*list == item)
 	*list = next(item);
@@ -29,7 +29,7 @@ void detach(register struct linked_list **list, *item)
  *	add an item to the head of a list
  */
 
-void _attach(register struct linked_list **list, *item)
+void _attach(register struct linked_list **list, register struct linked_list *item)
 {
     if (*list != NULL)
     {

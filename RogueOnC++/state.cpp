@@ -92,7 +92,7 @@ int list_size(struct linked_list *l)
     return(count);
 }
 
-rs_write(FILE *savef, void *ptr, int size)
+int rs_write(FILE *savef, void *ptr, int size)
 {
     if (!write_error)
         encwrite(ptr,size,savef);
@@ -103,7 +103,7 @@ rs_write(FILE *savef, void *ptr, int size)
     return(WRITESTAT);
 }
 
-rs_read(int inf, void *ptr, int size)
+int rs_read(int inf, void *ptr, int size)
 {
     int actual;
     end_of_file =FALSE;
@@ -258,7 +258,7 @@ int rs_read_long(int inf, long *i)
     return(READSTAT);
 }
 
-rs_read_boolean(int inf, bool *i)
+int rs_read_boolean(int inf, bool *i)
 {
     char buf;
     
@@ -317,7 +317,7 @@ int rs_read_short(int inf, short *s)
     return(READSTAT);
 }
 
-rs_write_shorts(FILE *savef, short *c, int count)
+int rs_write_shorts(FILE *savef, short *c, int count)
 {
     int n=0;
 
@@ -599,7 +599,7 @@ int rs_read_new_strings(int inf, char **s, int count)
                     s[n]=0;
                 else 
                 {
-                    s[n] = malloc(len);
+                    s[n] = new char [len];
                     rs_read(inf,s[n],len);
                 }
             }
@@ -638,7 +638,7 @@ int rs_read_new_string(int inf, char **s)
             *s = NULL;
         else
         { 
-            buf = malloc(len);
+            buf = new char [len];
 
             if (buf == NULL)            
                 read_error = TRUE;
@@ -1313,7 +1313,7 @@ void rs_fix_thing(struct thing *t)
     if (t->t_reserved < 0)
         return;
 
-    item = get_list_item(mlist,t->t_reserved);
+    item = (linked_list* ) get_list_item(mlist,t->t_reserved);
 
     if (item != NULL)
     {
@@ -1423,7 +1423,7 @@ int rs_read_thing(int inf, struct thing *t)
             else if (listid == 2)
             {
                 struct object *obj;
-                item = get_list_item(lvl_obj,index);
+                item = (linked_list* ) get_list_item(lvl_obj,index);
                 if (item != NULL)
                 {
                     obj = OBJPTR(item);
@@ -1607,7 +1607,7 @@ int rs_read_object_reference(int inf, struct linked_list *list,
     int i;
     
     rs_read_int(inf, &i);
-    *item = get_list_item(list,i);
+    *item = (object* ) get_list_item(list,i);
             
     return(READSTAT);
 }

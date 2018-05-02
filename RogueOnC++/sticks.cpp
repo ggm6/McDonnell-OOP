@@ -171,7 +171,7 @@ void do_zap(bool gotdir)
 
 	    do_motion(&bolt, delta.y, delta.x);
 	    if (isupper(mvwinch(mw, bolt.o_pos.y, bolt.o_pos.x))
-		&& !save_throw(VS_MAGIC, ldata(find_mons(unc(bolt.o_pos)))))
+		&& !save_throw(VS_MAGIC, (thing* ) ldata(find_mons(unc(bolt.o_pos)))))
 		    hit_monster(unc(bolt.o_pos), &bolt);
 	    else if (terse)
 		msg("Missle vanishes");
@@ -282,7 +282,7 @@ void do_zap(bool gotdir)
 		    default:
 			if (!bounced && isupper(ch))
 			{
-			    if (!save_throw(VS_MAGIC, ldata(find_mons(unc(pos)))))
+			    if ((thing* ) !save_throw(VS_MAGIC, (thing* ) ldata(find_mons(unc(pos)))))
 			    {
 				bolt.o_pos = pos;
 				hit_monster(unc(pos), &bolt);

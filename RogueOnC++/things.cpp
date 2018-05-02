@@ -10,7 +10,6 @@
 #include <ctype.h>
 #include "rogue.hpp"
 
-bool dropcheck(register struct object *op);
 void waste_time();
 void chg_str(register int amt);
 void extinguish(int (*func)());
@@ -18,7 +17,6 @@ void light(coord *cp);
 int pick_one(register struct magic_item *magic, int nitems);
 int rnd(register int range);
 void init_weapon(register struct object *weap, char type);
-void fix_stick(register struct object *cur);
 
 /*
  * inv_name:

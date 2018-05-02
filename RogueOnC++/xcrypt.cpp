@@ -53,6 +53,7 @@
 #include <sys/param.h>
 #include <pwd.h>
 #include <string.h>
+#include <arpa/inet.h>
 
 #ifdef DEBUG
 #include <iostream>
@@ -582,7 +583,7 @@ char * xcrypt(const char *key, const char *setting)
 		if ((*q++ = *key << 1))
 			key++;
 	}
-	if (des_setkey((unsigned char *) keybuf))
+	if (des_setkey((const char *) keybuf))
 		return(NULL);
 
 	if (*setting == _PASSWORD_EFMT1) {
@@ -601,7 +602,7 @@ char * xcrypt(const char *key, const char *setting)
 			/*
 			 * Encrypt the key with itself.
 			 */
-			if (des_cipher((unsigned char*)keybuf, (unsigned char*)keybuf, 0, 1))
+			if (des_cipher((const char*)keybuf, (char*)keybuf, 0, 1))
 				return(NULL);
 			/*
 			 * And XOR with the next 8 characters of the key.
@@ -611,7 +612,7 @@ char * xcrypt(const char *key, const char *setting)
 					*key)
 				*q++ ^= *key++ << 1;
 
-			if (des_setkey((unsigned char *) keybuf))
+			if (des_setkey((const char *) keybuf))
 				return(NULL);
 		}
 		strncpy((char *)output, setting, 9);

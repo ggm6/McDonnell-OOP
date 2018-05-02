@@ -209,7 +209,7 @@ bool hit_monster(register int y, int x, struct object *obj)
  *	Figure out the plus number for armor/weapons
  */
 
-char * num(register int n1, n2)
+char * num(register int n1, int n2)
 {
     static char numbuf[80];
 

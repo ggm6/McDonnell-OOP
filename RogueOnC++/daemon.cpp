@@ -16,7 +16,9 @@
 
 void do_daemons(register int flag);
 void do_fuses(register int flag);
+struct delayed_action d_list[20];
 
+/*
  * d_slot:
  *	Find an empty slot in the daemon/fuse list
  */
@@ -53,7 +55,7 @@ struct delayed_action * find_slot(register int (*func)())
  *	Start a daemon, takes a function.
  */
 
-void daemon(int (*func)(), arg, type)
+void daemon(int (*func)(), int arg, int type)
 {
     register struct delayed_action *dev;
 
@@ -99,7 +101,10 @@ void do_daemons(register int flag)
 	 * Executing each one, giving it the proper arguments
 	 */
 	if (dev->d_type == flag && dev->d_time == DAEMON)
-	    (*dev->d_func)(dev->d_arg);
+	{
+	    *dev->d_func;
+	    dev->d_arg;
+	}
 }
 
 /*
@@ -107,7 +112,7 @@ void do_daemons(register int flag)
  *	Start a fuse to go off in a certain number of turns
  */
 
-void fuse(int (*func)(), arg, time, type)
+void fuse(int (*func)(), int arg, int time, int type)
 {
     register struct delayed_action *wire;
 
@@ -167,7 +172,8 @@ void do_fuses(register int flag)
 	if (flag == wire->d_type && wire->d_time > 0 && --wire->d_time == 0)
 	{
 	    wire->d_type = EMPTY;
-	    (*wire->d_func)(wire->d_arg);
+	    *wire->d_func;
+	    wire->d_arg;
 	}
      }
 }

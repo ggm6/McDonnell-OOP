@@ -33,7 +33,7 @@ int	get_bool(), get_str(), put_bool(), put_str();
 
 OPTION	optlist[] = {
     {"terse",	 "Terse output: ",
-		 (int *) &terse,	put_bool,	get_bool	},
+		 (int *) &terse,	 put_bool,	get_bool	},
     {"flush",	 "Flush typeahead during battle: ",
 		 (int *) &fight_flush,	put_bool,	get_bool	},
     {"jump",	 "Show position only at end of run: ",
@@ -66,7 +66,8 @@ void option()
     for (op = optlist; op < &optlist[NUM_OPTS]; op++)
     {
 	waddstr(hw, op->o_prompt);
-	(*op->o_putfunc)(op->o_opt);
+	(*op->o_putfunc);
+	(op->o_opt);
 	waddch(hw, '\n');
     }
     /*
@@ -76,7 +77,7 @@ void option()
     for (op = optlist; op < &optlist[NUM_OPTS]; op++)
     {
 	waddstr(hw, op->o_prompt);
-	if ((retval = (*op->o_getfunc)(op->o_opt, hw)))
+	if ((retval = (*op->o_getfunc) && (op->o_opt, hw)))
 	    if (retval == QUIT)
 		break;
 	    else if (op > optlist) {	/* MINUS */
@@ -104,8 +105,14 @@ void option()
 /*
  * put out a boolean
  */
-int put_bool(bool	*b)
+int put_bool(bool *b)
 {
+    waddstr(hw, *b ? "True" : "False");
+}
+
+int put_bool()  // OVERLOAD because I don't understand how function is being used in options.cpp
+{
+	bool *b;
     waddstr(hw, *b ? "True" : "False");
 }
 
@@ -114,6 +121,12 @@ int put_bool(bool	*b)
  */
 int put_str(char *str)
 {
+    waddstr(hw, str);
+}
+
+int put_str() // OVERLOAD because I didn't understand how it's being used in options.cpp
+{
+	char *str;
     waddstr(hw, str);
 }
 
@@ -164,9 +177,54 @@ int get_bool(bool *bp, WINDOW *win)
     return NORM;
 }
 
+int get_bool()
+{
+	bool *bp;
+	WINDOW *win;
+    register int oy, ox;
+    register bool op_bad;
+
+    op_bad = TRUE;
+    getyx(win, oy, ox);
+    waddstr(win, *bp ? "True" : "False");
+    while(op_bad)	
+    {
+	wmove(win, oy, ox);
+	draw(win);
+	switch (readchar())
+	{
+	    case 't':
+	    case 'T':
+		*bp = TRUE;
+		op_bad = FALSE;
+		break;
+	    case 'f':
+	    case 'F':
+		*bp = FALSE;
+		op_bad = FALSE;
+		break;
+	    case '\n':
+	    case '\r':
+		op_bad = FALSE;
+		break;
+	    case '\033':
+	    case '\007':
+		return QUIT;
+	    case '-':
+		return MINUS;
+	    default:
+		mvwaddstr(win, oy, ox + 10, "(T or F)");
+	}
+    }
+    wmove(win, oy, ox);
+    waddstr(win, *bp ? "True" : "False");
+    waddch(win, '\n');
+    return NORM;
+}
 /*
  * set a string option
  */
+ 
 int get_str(register char *opt, WINDOW *win)
 {
     register char *sp;
@@ -232,6 +290,73 @@ int get_str(register char *opt, WINDOW *win)
 	return NORM;
 }
 
+int get_str()  // OVERLOAD because I didn't understand how it's being used in options.cpp
+ {
+	 register char *opt;
+	 WINDOW *win;
+	 register char *sp;
+    register int c, oy, ox;
+    char buf[80];
+
+    draw(win);
+    getyx(win, oy, ox);
+    /*
+     * loop reading in the string, and put it in a temporary buffer
+     */
+    for (sp = buf;
+	(c = readchar()) != '\n' && c != '\r' && c != '\033' && c != '\007';
+	wclrtoeol(win), draw(win))
+    {
+	if (c == -1)
+	    continue;
+	else if (c == terminal.c_cc[VERASE])	/* process erase character */
+	{
+	    if (sp > buf)
+	    {
+		register int i;
+
+		sp--;
+		for (i = strlen(unctrl(*sp)); i; i--)
+		    waddch(win, '\b');
+	    }
+	    continue;
+	}
+	else if (c == terminal.c_cc[VKILL])	/* process kill character */
+	{
+	    sp = buf;
+	    wmove(win, oy, ox);
+	    continue;
+	}
+	else if (sp == buf)
+	    if (c == '-')
+		break;
+	    else if (c == '~')
+	    {
+		strcpy(buf, home);
+		waddstr(win, home);
+		sp += strlen(home);
+		continue;
+	    }
+	*sp++ = c;
+	waddstr(win, unctrl(c));
+    }
+    *sp = '\0';
+    if (sp > buf)	/* only change option if something has been typed */
+	strucpy(opt, buf, strlen(buf));
+    wmove(win, oy, ox);
+    waddstr(win, opt);
+    waddch(win, '\n');
+    draw(win);
+    if (win == cw)
+	mpos += sp - buf;
+    if (c == '-')
+	return MINUS;
+    else if (c == '\033' || c == '\007')
+	return QUIT;
+    else
+	return NORM;
+ }
+
 /*
  * parse options from string, usually taken from the environment.
  * the string is a series of comma seperated values, with booleans
@@ -260,7 +385,7 @@ void parse_opts(register char *str)
 	for (op = optlist; op < &optlist[NUM_OPTS]; op++)
 	    if (EQSTR(str, op->o_name, len))
 	    {
-		if (op->o_putfunc == put_bool)	/* if option is a boolean */
+		if (op->o_putfunc == static_cast <int (*)()> (put_bool))	/* if option is a boolean */
 		    *(bool *)op->o_opt = TRUE;
 		else				/* string option */
 		{
@@ -291,7 +416,7 @@ void parse_opts(register char *str)
 	    /*
 	     * check for "noname" for booleans
 	     */
-	    else if (op->o_putfunc == put_bool
+	    else if ((op->o_putfunc == static_cast <int (*)()> (put_bool))
 	      && EQSTR(str, "no", 2) && EQSTR(str + 2, op->o_name, len - 2))
 	    {
 		*(bool *)op->o_opt = FALSE;
@@ -312,7 +437,7 @@ void parse_opts(register char *str)
  */
 void strucpy(register char *s1, char *s2, register int len)
 {
-    register char *sp;
+    register const char *sp;
 
     while (len--)
     {

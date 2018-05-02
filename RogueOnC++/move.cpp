@@ -196,7 +196,7 @@ void light(coord *cp)
  *	returns what a certain thing will display as to the un-initiated
  */
 
-char show(register int y, x)
+char show(register int y, int x)
 {
     register char ch = winat(y, x);
     register struct linked_list *it;

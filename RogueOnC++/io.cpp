@@ -77,7 +77,7 @@ void endmsg()
     draw(cw);
 }
 
-void doadd(char *fmt, va_list ap)
+void doadd(const char *fmt, va_list ap)
 {
     vsprintf(&msgbuf[newpos], fmt, ap);
     newpos = strlen(msgbuf);

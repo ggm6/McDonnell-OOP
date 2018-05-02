@@ -13,7 +13,6 @@ void wear();
 void waste_time();
 void take_off();
 bool dropcheck(register struct object *op);
-char pack_char(register struct object *obj);
 void do_daemons(register int flag);
 void do_fuses(register int flag);
 

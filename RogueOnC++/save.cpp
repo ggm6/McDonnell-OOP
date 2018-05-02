@@ -11,6 +11,8 @@
 #include <signal.h>
 #include <errno.h>
 #include "rogue.hpp"
+#include <fcntl.h>
+#include <time.h>
 
 typedef struct stat STAT;
 
@@ -186,7 +188,7 @@ bool restore(register char *file, char **envp)
     hw = newwin(LINES, COLS, 0, 0);
     nocrmode();    
     mpos = 0;
-    mvwprintw(cw, 0, 0, "%s: %s", file, ctime(&sbuf2.st_mtime));
+    mvwprintw(cw, 0, 0, "%s: %s", file, (const time_t*) ctime(&sbuf2.st_mtime));
 
     /*
      * defeat multiple restarting from the same place
@@ -226,7 +228,7 @@ bool restore(register char *file, char **envp)
 void encwrite(register void *starta, unsigned int size, register FILE *outf)
 {
     register char *ep;
-    register char *start = starta;
+    register char *start = (char* ) starta;
 
     ep = encstr;
 
@@ -245,7 +247,7 @@ int encread(register void *starta, unsigned int size, register int inf)
 {
     register char *ep;
     register int read_size;
-    register char *start = starta;
+    register char *start = (char* ) starta;
 
     if ((read_size = read(inf, start, size)) == -1 || read_size == 0)
 	return read_size;

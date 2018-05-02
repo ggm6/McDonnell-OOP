@@ -9,7 +9,7 @@ OBJS= vers.o armor.o chase.o command.o daemon.o daemons.o fight.o \
 	init.o io.o list.o main.o misc.o monsters.o move.o newlevel.o \
 	options.o pack.o passages.o potions.o rings.o rip.o rooms.o \
 	save.o scrolls.o state.o sticks.o things.o weapons.o wizard.o xcrypt.o
-CFILES= vers.cpp armor.cpp chase.cpp command.cpp daemon.cpp daemons.cpp fight.cpp \
+CPPFILES= vers.cpp armor.cpp chase.cpp command.cpp daemon.cpp daemons.cpp fight.cpp \
 	init.cpp io.cpp list.cpp main.cpp misc.cpp monsters.cpp move.cpp newlevel.cpp \
 	options.cpp pack.cpp passages.cpp potions.cpp rings.cpp rip.cpp rooms.cpp \
 	save.cpp scrolls.cpp state.cpp sticks.cpp things.cpp weapons.cpp wizard.cpp xcrypt.cpp
@@ -25,7 +25,7 @@ TAR   = tar
 rogue: $(HDRS) $(OBJS)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) $(CRLIB) -o $@
 
-main.o rip.o: machdep.h
+main.o rip.o: machdep.hpp
 
 tags: $(HDRS) $(CFILES)
 	ctags -u $?

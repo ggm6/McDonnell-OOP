@@ -2,9 +2,26 @@
 #define ROGUE_H_
 
 #include "curses.h"
+#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+/*
+ * Coordinate data type
+ */
+
+typedef struct {
+    int x;
+    int y;
+} coord;
+
+typedef struct {
+    short st_str;
+    short st_add;
+} str_t;
 
 
-// GARRETT CHANGE: Function Prototypes added so that they are recognizable from other files
+// GARRETT CHANGE: Function prototypes added so that they are recognizable from other files
 void msg(const char *fmt, ...);
 void addmsg(const char *fmt, ...);
 void endmsg();
@@ -59,6 +76,93 @@ int teleport();
 void score(int amount, int flags, char monst);
 void total_winner();
 int get_str(register char *opt, WINDOW *win);
+void daemon(int (*func)(), int arg, int type);
+int roll(register int number, int sides);
+void wanderer();
+void kill_daemon(int (*func)());
+void do_fuses(register int flag);
+void extinguish(int (*func)());
+int ring_eat(register int hand);
+void fuse(int (*func)(), int arg, int time, int type);
+bool roll_em(struct stats *att, struct stats *def, struct object *weap, bool hurl);
+void thunk(register struct object *weap, register char *mname);
+void hit(register char *er, register char *ee);
+void bounce(register struct object *weap, register char *mname);
+void killed(register struct linked_list *item, bool pr);
+void miss(register const char *er, register const char *ee);
+void death(register char monst);
+bool save(int which);
+void chg_str(register int amt);
+bool is_magic(register struct object *obj);
+void discard(register struct linked_list *item);
+bool swing(int at_lvl, int op_arm, int wplus);
+int str_plus(register str_t *str);
+int add_dam( register str_t *str);
+bool fallpos(register coord *pos, coord *newpos, register bool passages);
+void light(coord *cp);
+void fall(register struct linked_list *item, bool pr);
+void badcheck(char *name, register struct magic_item *magic, register int bound);
+void fatal(char *s);
+void strucpy(register char *s1, char *s2, register int len);
+void parse_opts(register char *str);
+bool too_much();
+bool author();
+bool restore(register char *file, char **envp);
+void init_player();
+void init_names();
+void init_things();
+void init_colors();
+void init_stones();
+void init_materials();
+void setup();
+void playit();
+void command();
+int ucount();
+void chmsg(char *fmt, int arg);
+char show(register int y, int x);
+char secretdoor(register int y, int x);
+void check_level();
+void runto(register coord *runner, coord *spot);
+int rnd_room();
+void rnd_pos(register struct room *rp, register coord *cp);
+void lengthen(int (*func)(), int xtime);
+void remove_monster(register coord *mp, register struct linked_list *item);
+bool diag_ok(register coord *sp, coord *ep);
+char be_trapped(register coord *tc);
+bool fight(register coord *mp, char mn, struct object *weap, bool thrown);
+void do_rooms();
+void do_passages();
+void put_things();
+char pack_char(register struct object *obj);
+void money();
+void conn(int r1, int r2);
+void door(register struct room *rm, register coord *cp);
+void add_haste(bool potion);
+bool is_current(register struct object *obj);
+int gethand();
+void aggravate();
+bool dropcheck(register struct object *op);
+char * killname(register char monst);
+int encread(register void *starta, unsigned int size, register int inf);
+void encwrite(register void *starta, unsigned int size, register FILE *outf);
+void draw_room(register struct room *rp);
+char randmonster(bool wander);
+void new_monster(struct linked_list *item, char type, register coord *cp);
+void horiz(register int cnt);
+void vert(register int cnt);
+void save_file(register FILE *savef);
+int rs_save_file(FILE *savef);
+int rs_restore_file(int inf);
+void genocide();
+int rs_read_stats(int inf, struct stats *s);
+int rs_write_str_t(FILE *savef, str_t *st);
+int rs_read_str_t(int inf, str_t *st);
+void drain(int ymin, int ymax, int xmin, int xmax);
+void do_motion(register struct object *obj, register int ydelta, int xdelta);
+bool save_throw(int which, struct thing *tp);
+bool hit_monster(register int y, int x, struct object *obj);
+bool cansee(register int y, int x);
+void fix_stick(register struct object *cur);
 
 /*
  * Rogue definitions and variable declarations
@@ -112,6 +216,7 @@ extern void _attach(register struct linked_list **list, register struct linked_l
 #define attach(a,b) _attach(&a,b)
 extern void _detach(register struct linked_list **list, register struct linked_list *item);
 #define detach(a,b) _detach(&a,b)
+extern void _free_list(register struct linked_list **ptr);
 #define free_list(a) _free_list(&a)
 #ifndef max
 #define max(a, b) ((a) > (b) ? (a) : (b))
@@ -120,7 +225,7 @@ extern void _detach(register struct linked_list **list, register struct linked_l
 #define off(thing, flag) (((thing).t_flags & flag) == 0)
 #undef  CTRL
 #define CTRL(ch) (ch & 037)
-#define ALLOC(x) malloc((unsigned int) x)
+#define ALLOC(x) new char[x];
 #define FREE(x) free((char *) x)
 #define	EQSTR(a, b, c)	(strncmp(a, b, c) == 0)
 #define GOLDCALC (rnd(50 + 10 * level) + 2)
@@ -339,19 +444,6 @@ struct h_list {
 extern struct h_list helpstr[];
 
 /*
- * Coordinate data type
- */
-typedef struct {
-    int x;
-    int y;
-} coord;
-
-typedef struct {
-    short st_str;
-    short st_add;
-} str_t;
-
-/*
  * Linked list data type
  */
 struct linked_list {
@@ -467,7 +559,8 @@ struct delayed_action {
     int (*d_func)();
     int d_arg;
     int d_time;
-} d_list[MAXDAEMONS];
+};
+
 
 
 /*
@@ -489,6 +582,7 @@ extern struct magic_item s_magic[MAXSCROLLS];	/* Names and chances for scrolls *
 extern struct magic_item p_magic[MAXPOTIONS];	/* Names and chances for potions */
 extern struct magic_item r_magic[MAXRINGS];	/* Names and chances for rings */
 extern struct magic_item ws_magic[MAXSTICKS];	/* Names and chances for sticks */
+extern struct delayed_action d_list[20];
 
 extern int level;				/* What level rogue is on */
 extern int purse;				/* How much gold the rogue has */
@@ -564,27 +658,27 @@ extern coord delta;				/* Change indicated to get_dir() */
 
 extern coord ch_ret;
 extern char countch,direction,newcount;
-extern struct delayed_action d_list[20];
 extern int between;
 extern int num_checks;
 extern char lvl_mons[27],wand_mons[27];
 extern coord nh;
 
-struct linked_list *find_mons(), *find_obj(register int y, int x), *get_item(const char *purpose, int type), *new_item(int size);
-struct linked_list *new_thing(), *wake_monster();
+struct linked_list *find_mons(register int y, int x), *find_obj(register int y, int x), *get_item(const char *purpose, int type), *new_item(int size);
+struct linked_list *new_thing(), *wake_monster(int y, int x);
 
 // GARRETT'S CHANGE: C does not use new as keyword, new is being used as a variable
-char *getenv(), *tr_name(char ch), *new_var();
+char *getenv(), *new_var(int size);
+const char * tr_name(char ch);
 char *charge_str(register struct object *obj),*vowelstr(register char *str), *inv_name(register struct object *obj, register bool drop), *strcat();
-char *ctime(), *num(register int n1, register int n2), *ring_num(register struct object *obj);
+char *num(register int n1, register int n2), *ring_num(register struct object *obj);
 
 struct room * roomin(register coord *cp);
 
 coord * rndmove(struct thing *who);
 
-void auto_save(), endit(int p), quit(int p), tstp(), checkout(), runners();
-int nohaste(), doctor(), swander();
-int unconfuse(), unsee(), rollwand(), stomach(), sight();
+void auto_save(int p), endit(int p), quit(int p), tstp(), checkout(int p);
+int nohaste(), doctor(), swander(),runners(), stomach();
+int unconfuse(), unsee(), rollwand(), sight();
 
 struct trap *trap_at(int y, int x);
 

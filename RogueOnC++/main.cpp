@@ -22,14 +22,14 @@ WINDOW *cw;                              /* Window that the player sees */
 WINDOW *hw;                              /* Used for the help command */
 WINDOW *mw;                              /* Used to store mosnters */
 
-main(argc, char **argv, char **envp)
+main(int argc, char **argv, char **envp)
 {
     register char *env;
     register struct passwd *pw;
     register struct linked_list *item;
     register struct object *obj;
-    struct passwd *getpwuid();
-    char *getpass(), *xcrypt();
+    struct passwd *getpwuid(uid_t uid);
+    char *getpass(const char* x), *xcrypt(const char* x, const char* y);
     int lowtime;
     time_t now;
 
@@ -43,7 +43,7 @@ main(argc, char **argv, char **envp)
     if (argc == 2 && strcmp(argv[1], "-s") == 0)
     {
 	waswizard = TRUE;
-	score(0, -1, '');
+	score(0, -1, ' ');
 	exit(0);
     }
     /*
@@ -251,7 +251,7 @@ int rnd(register int range)
  *	roll a number of dice
  */
 
-int roll(register int number, sides)
+int roll(register int number, int sides)
 {
     register int dtotal = 0;
 
@@ -280,7 +280,7 @@ void tstp(int p)
 }
 # endif
 
-setup()
+void setup()
 {
 #ifndef DUMP
     signal(SIGHUP, auto_save);
@@ -363,7 +363,7 @@ void playit()
 /*
  * see if the system is being used too much for this game
  */
-too_much()
+bool too_much()
 {
 #ifdef MAXLOAD
     double avec[3];
@@ -413,7 +413,7 @@ void checkout(int p)
     {
 	if (num_checks)
 	{
-	    chmsg("The load has dropped back down.  You have a reprieve.");
+	    chmsg("The load has dropped back down.  You have a reprieve.",0);
 	    num_checks = 0;
 	}
 	alarm(CHECKTIME * 60);

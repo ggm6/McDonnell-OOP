@@ -32,7 +32,7 @@ static char *rip[] = {
     0
 };
 
-char	*killname();
+char * killname(register char monst);
 
 /*
  * death:
@@ -45,7 +45,7 @@ void death(register char monst)
     register struct tm *lt;
     time_t date;
     char buf[80];
-    struct tm *localtime();
+    struct tm *localtime(const time_t*);
 
     time(&date);
     lt = localtime(&date);
@@ -173,7 +173,7 @@ void score(int amount, int flags, char monst)
 	    }
 	    if (prflags == 1)
 	    {
-		struct passwd *pp, *getpwuid();
+		struct passwd *pp, *getpwuid(uid_t uid);
 
 		if ((pp = getpwuid(scp->sc_uid)) == NULL)
 		    printf(" (%d)", scp->sc_uid);

@@ -287,7 +287,7 @@ int attack(register struct thing *mp)
  *	returns true if the swing hits
  */
 
-bool swing(int at_lvl, op_arm, wplus)
+bool swing(int at_lvl, int op_arm, int wplus)
 {
     register int res = rnd(20)+1;
     register int need = (21-at_lvl)-op_arm;
@@ -324,13 +324,13 @@ void check_level()
  *	Roll several attacks
  */
 
-bool roll_em(struct stats *att, *def, struct object *weap, bool hurl)
+bool roll_em(struct stats *att, struct stats *def, struct object *weap, bool hurl)
 {
     register char *cp;
     register int ndice, nsides, def_arm;
     register bool did_hit = FALSE;
     register int prop_hplus, prop_dplus;
-    char *index();
+    extern char *index(char *_s, int x);
 
     prop_hplus = prop_dplus = 0;
     if (weap == NULL)
@@ -415,7 +415,7 @@ bool roll_em(struct stats *att, *def, struct object *weap, bool hurl)
  *	The print name of a combatant
  */
 
-char * prname(register char *who, bool upper)
+char * prname(register const char *who, bool upper)
 {
     static char tbuf[80];
 
@@ -439,9 +439,9 @@ char * prname(register char *who, bool upper)
  *	Print a message to indicate a succesful hit
  */
 
-void hit(register char *er, *ee)
+void hit(register char *er, register char *ee)
 {
-    register char *s;
+    register const char *s;
 
     addmsg(prname(er, TRUE));
     if (terse)
@@ -465,9 +465,9 @@ void hit(register char *er, *ee)
  *	Print a message to indicate a poor swing
  */
 
-void miss(register char *er, *ee)
+void miss(register const char *er, register const char *ee)
 {
-    register char *s;
+    register const char *s;
 
     addmsg(prname(er, TRUE));
     switch (terse ? 0 : rnd(4))

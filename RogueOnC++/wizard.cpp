@@ -170,7 +170,8 @@ int teleport()
 bool passwd()
 {
     register char *sp, c;
-    char buf[80], *xcrypt();
+    char buf[80];
+    char * xcrypt(const char *key, const char *setting);
 
     msg("Wizard's Password:");
     mpos = 0;

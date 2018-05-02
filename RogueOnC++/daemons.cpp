@@ -7,12 +7,14 @@
 #include "curses.h"
 #include "rogue.hpp"
 
+void light(coord *cp);
+
 /*
  * doctor:
  *	A healing daemon that restors hit points after rest
  */
 
-void doctor()
+int doctor()
 {
     register int lv, ohp;
 
@@ -44,7 +46,7 @@ void doctor()
  *	Called when it is time to start rolling for wandering monsters
  */
 
-void swander()
+int swander()
 {
     daemon(rollwand, 0, BEFORE);
 }
@@ -56,7 +58,7 @@ void swander()
 
 int between = 0;
 
-void rollwand()
+int rollwand()
 {
     if (++between >= 4)
     {
@@ -75,7 +77,7 @@ void rollwand()
  *	Release the poor player from his confusion
  */
 
-void unconfuse()
+int unconfuse()
 {
     player.t_flags &= ~ISHUH;
     msg("You feel less confused now");
@@ -87,7 +89,7 @@ void unconfuse()
  *	He lost his see invisible power
  */
 
-void unsee()
+int unsee()
 {
     player.t_flags &= ~CANSEE;
 }
@@ -97,7 +99,7 @@ void unsee()
  *	He gets his sight back
  */
 
-void sight()
+int sight()
 {
     if (on(player, ISBLIND))
     {
@@ -113,7 +115,7 @@ void sight()
  *	End the hasting
  */
 
-void nohaste()
+int nohaste()
 {
     player.t_flags &= ~ISHASTE;
     msg("You feel yourself slowing down.");
@@ -122,7 +124,7 @@ void nohaste()
 /*
  * digest the hero's food
  */
-void stomach()
+int stomach()
 {
     register int oldfood;
 
@@ -132,7 +134,7 @@ void stomach()
 	 * the hero is fainting
 	 */
 	if (no_command || rnd(100) > 20)
-	    return;
+	    return 0;
 	no_command = rnd(8)+4;
 	if (!terse)
 	    addmsg("You feel too weak from lack of food.  ");
