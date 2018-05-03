@@ -8,3 +8,6 @@
 
 4/29
 - All functions have been converted to modern C++ as far as paramters and return types are concerned.
+
+5/1
+- Rogue now completely compiles in C++.  Difficult to say whether the functionality remains the same or if I butchered the whole game.  I never understood how to play the game in the first place.  But the important thing is that it compiles.  But also, it compiles... yeah, IT COMPILES.
