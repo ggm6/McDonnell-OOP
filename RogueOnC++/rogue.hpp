@@ -589,7 +589,7 @@ extern struct magic_item s_magic[MAXSCROLLS];	/* Names and chances for scrolls *
 extern struct magic_item p_magic[MAXPOTIONS];	/* Names and chances for potions */
 extern struct magic_item r_magic[MAXRINGS];	/* Names and chances for rings */
 extern struct magic_item ws_magic[MAXSTICKS];	/* Names and chances for sticks */
-extern struct delayed_action d_list[20];
+extern struct delayed_action d_list[MAXDAEMONS];
 
 extern int level;				/* What level rogue is on */
 extern int purse;				/* How much gold the rogue has */
