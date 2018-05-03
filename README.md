@@ -11,3 +11,6 @@
 
 5/1
 - Rogue now completely compiles in C++.  Difficult to say whether the functionality remains the same or if I butchered the whole game.  I never understood how to play the game in the first place.  But the important thing is that it compiles.  But also, it compiles... yeah, IT COMPILES.
+
+5/2
+  - Rogue still completely compiles using g++.  I have now gotten rid of all warnings as well.  I mostly had to do some type casting, 90% of the warnings were string constants being treated as char*, so I cast those as char* for individual purposes.  I feel this probably took longer but overall was less difficult than changing every function to accept const char*, and then I would have to overload certain functions to accept both char* and const char* where applicable.  Also, there were some warnings with integers being compared to unsigned ints, so on and so forth.  Overall, I just wanted a clean screen when someone presses "make" on the game.
