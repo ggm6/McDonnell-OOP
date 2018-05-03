@@ -120,8 +120,8 @@ char readchar()
 
 void status()
 {
-    register int oy, ox, temp;
-    register char *pb;
+    int oy, ox, temp;
+    char *pb;
     static char buf[80];
     static int hpwidth = 0, s_hungry = -1;
     static int s_lvl = -1, s_pur, s_hp = -1, s_str, s_add, s_ac = 0;
@@ -189,7 +189,7 @@ void status()
 
 void wait_for(char ch)
 {
-    register char c;
+    char c;
 
     if (ch == '\n')
         while ((c = readchar()) != '\n' && c != '\r')
@@ -204,8 +204,8 @@ void wait_for(char ch)
  *	function used to display a window and wait before returning
  */
 
-void show_win(WINDOW *scr, char *message)
-//register WINDOW *scr;
+void show_win(WINDOW *scr, const char *message)
+//WINDOW *scr;
 //char *message;
 {
     mvwaddstr(scr, 0, 0, message);

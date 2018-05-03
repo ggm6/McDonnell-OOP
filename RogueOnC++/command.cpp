@@ -469,24 +469,24 @@ void identify()
     {
 	case '|':
 	case '-':
-	    str = "wall of a room";
-	when GOLD: str = "gold";
-	when STAIRS : str = "passage leading down";
-	when DOOR: str = "door";
-	when FLOOR: str = "room floor";
-	when PLAYER: str = "you";
-	when PASSAGE: str = "passage";
-	when TRAP: str = "trap";
-	when POTION: str = "potion";
-	when SCROLL: str = "scroll";
-	when FOOD: str = "food";
-	when WEAPON: str = "weapon";
-	when ' ' : str = "solid rock";
-	when ARMOR: str = "armor";
-	when AMULET: str = "The Amulet of Yendor";
-	when RING: str = "ring";
-	when STICK: str = "wand or staff";
-	otherwise: str = "unknown character";
+	    str = (char* )"wall of a room";
+	when GOLD: str = (char* ) "gold";
+	when STAIRS : str = (char* ) "passage leading down";
+	when DOOR: str = (char* ) "door";
+	when FLOOR: str = (char* ) "room floor";
+	when PLAYER: str = (char* ) "you";
+	when PASSAGE: str = (char* ) "passage";
+	when TRAP: str = (char* ) "trap";
+	when POTION: str = (char* ) "potion";
+	when SCROLL: str = (char* ) "scroll";
+	when FOOD: str = (char* ) "food";
+	when WEAPON: str = (char* ) "weapon";
+	when ' ' : str = (char* ) "solid rock";
+	when ARMOR: str = (char* ) "armor";
+	when AMULET: str = (char* ) "The Amulet of Yendor";
+	when RING: str = (char* ) "ring";
+	when STICK: str = (char* ) "wand or staff";
+	otherwise: str = (char* ) "unknown character";
     }
     msg("'%s' : %s", unctrl(ch), str);
 }
@@ -562,7 +562,7 @@ void shell()
 	 */
 	setuid(getuid());
 	setgid(getgid());
-	execl(sh == NULL ? "/bin/sh" : sh, "shell", "-i", 0);
+	execl(sh == NULL ? "/bin/sh" : sh, "shell", "-i", NULL);
 	perror("No shelly");
 	exit(-1);
     }

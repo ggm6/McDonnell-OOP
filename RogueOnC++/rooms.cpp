@@ -9,11 +9,11 @@
 
 void do_rooms()
 {
-    register int i;
-    register struct room *rp;
-    register struct linked_list *item;
-    register struct thing *tp;
-    register int left_out;
+    int i;
+    struct room *rp;
+    struct linked_list *item;
+    struct thing *tp;
+    int left_out;
     coord top;
     coord bsze;
     coord mp;
@@ -107,9 +107,9 @@ void do_rooms()
  * Draw a box around a room
  */
 
-void draw_room(register struct room *rp)
+void draw_room(struct room *rp)
 {
-    register int j, k;
+    int j, k;
 
     move(rp->r_pos.y, rp->r_pos.x+1);
     vert(rp->r_max.y-2);				/* Draw left side */
@@ -139,7 +139,7 @@ void draw_room(register struct room *rp)
  *	draw a horizontal line
  */
 
-void horiz(register int cnt)
+void horiz(int cnt)
 {
     while (cnt--)
 	addch('-');
@@ -150,9 +150,9 @@ void horiz(register int cnt)
  *	draw a vertical line
  */
 
-void vert(register int cnt)
+void vert(int cnt)
 {
-    register int x, y;
+    int x, y;
 
     getyx(stdscr, y, x);
     x--;
@@ -167,7 +167,7 @@ void vert(register int cnt)
  *	pick a random spot in a room
  */
 
-void rnd_pos(register struct room *rp, register coord *cp)
+void rnd_pos(struct room *rp, coord *cp)
 {
     cp->x = rp->r_pos.x + rnd(rp->r_max.x-2) + 1;
     cp->y = rp->r_pos.y + rnd(rp->r_max.y-2) + 1;

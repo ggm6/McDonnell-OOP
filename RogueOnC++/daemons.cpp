@@ -16,7 +16,7 @@ void light(coord *cp);
 
 int doctor()
 {
-    register int lv, ohp;
+    int lv, ohp;
 
     lv = pstats.s_lvl;
     ohp = pstats.s_hpt;
@@ -126,7 +126,7 @@ int nohaste()
  */
 int stomach()
 {
-    register int oldfood;
+    int oldfood;
 
     if (food_left <= 0)
     {

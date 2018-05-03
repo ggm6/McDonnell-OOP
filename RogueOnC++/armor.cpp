@@ -12,9 +12,9 @@ using std::cout;
 void wear();
 void waste_time();
 void take_off();
-bool dropcheck(register struct object *op);
-void do_daemons(register int flag);
-void do_fuses(register int flag);
+bool dropcheck(struct object *op);
+void do_daemons(int flag);
+void do_fuses(int flag);
 
 /*
  * wear:
@@ -23,8 +23,8 @@ void do_fuses(register int flag);
 
 void wear()
 {
-    register struct linked_list *item;
-    register struct object *obj;
+    struct linked_list *item;
+    struct object *obj;
 // GARRETT CHANGE: as far as I can tell, cout can be used for standard out to replace all of the msg stuff, as this is simple output for a text based game
     if (cur_armor != NULL)
     {
@@ -60,7 +60,7 @@ void wear()
 
 void take_off()
 {
-	register struct object *obj;
+	struct object *obj;
     if ((obj = cur_armor) == NULL)
     {
 	if (terse)

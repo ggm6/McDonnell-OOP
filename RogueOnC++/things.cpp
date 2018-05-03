@@ -11,21 +11,21 @@
 #include "rogue.hpp"
 
 void waste_time();
-void chg_str(register int amt);
+void chg_str(int amt);
 void extinguish(int (*func)());
 void light(coord *cp);
-int pick_one(register struct magic_item *magic, int nitems);
-int rnd(register int range);
-void init_weapon(register struct object *weap, char type);
+int pick_one(struct magic_item *magic, int nitems);
+int rnd(int range);
+void init_weapon(struct object *weap, char type);
 
 /*
  * inv_name:
  *	return the name of something as it would appear in an
  *	inventory.
  */
-char * inv_name(register struct object *obj, register bool drop)
+char * inv_name(struct object *obj, bool drop)
 {
-    register char *pb;
+    char *pb;
 
     switch(obj->o_type)
     {
@@ -142,7 +142,7 @@ char * inv_name(register struct object *obj, register bool drop)
  */
 void money()
 {
-    register struct room *rp;
+    struct room *rp;
 
     for (rp = rooms; rp < &rooms[MAXROOMS]; rp++)
 	if (ce(hero, rp->r_gold))
@@ -168,9 +168,9 @@ void money()
  */
 void drop()
 {
-    register char ch;
-    register struct linked_list *obj, *nobj;
-    register struct object *op;
+    char ch;
+    struct linked_list *obj, *nobj;
+    struct object *op;
 
     ch = mvwinch(stdscr, hero.y, hero.x);
     if (ch != FLOOR && ch != PASSAGE)
@@ -212,7 +212,7 @@ void drop()
 /*
  * do special checks for dropping or unweilding|unwearing|unringing
  */
-bool dropcheck(register struct object *op)
+bool dropcheck(struct object *op)
 {
     str_t save_max;
 
@@ -259,9 +259,9 @@ bool dropcheck(register struct object *op)
  */
 struct linked_list * new_thing()
 {
-    register struct linked_list *item;
-    register struct object *cur;
-    register int j, k;
+    struct linked_list *item;
+    struct object *cur;
+    int j, k;
 
     item = new_item(sizeof *cur);
     cur = (struct object *) ldata(item);
@@ -353,11 +353,11 @@ struct linked_list * new_thing()
 /*
  * pick an item out of a list of nitems possible magic items
  */
-int pick_one(register struct magic_item *magic, int nitems)
+int pick_one(struct magic_item *magic, int nitems)
 {
-    register struct magic_item *end;
-    register int i;
-    register struct magic_item *start;
+    struct magic_item *end;
+    int i;
+    struct magic_item *start;
 
     start = magic;
     for (end = &magic[nitems], i = rnd(100); magic < end; magic++)

@@ -23,8 +23,8 @@ STAT sbuf;
 
 bool save_game()
 {
-    register FILE *savef;
-    register int c;
+    FILE *savef;
+    int c;
     char buf[80];
 
     /*
@@ -76,8 +76,8 @@ gotfile:
  */
 void auto_save(int p)
 {
-    register FILE *savef;
-    register int i;
+    FILE *savef;
+    int i;
 
     for (i = 0; i < NSIG; i++)
 	signal(i, SIG_IGN);
@@ -90,7 +90,7 @@ void auto_save(int p)
 /*
  * write the saved game on the file
  */
-void save_file(register FILE *savef)
+void save_file(FILE *savef)
 {
     int slines = LINES;
     int scols = COLS;
@@ -114,9 +114,9 @@ void save_file(register FILE *savef)
     fclose(savef);
 }
 
-bool restore(register char *file, char **envp)
+bool restore(char *file, char **envp)
 {
-    register int inf;
+    int inf;
     extern char **environ;
     char buf[80];
     STAT sbuf2;
@@ -225,10 +225,10 @@ bool restore(register char *file, char **envp)
 /*
  * perform an encrypted write
  */
-void encwrite(register void *starta, unsigned int size, register FILE *outf)
+void encwrite(void *starta, unsigned int size, FILE *outf)
 {
-    register char *ep;
-    register char *start = (char* ) starta;
+    char *ep;
+    char *start = (char* ) starta;
 
     ep = encstr;
 
@@ -243,11 +243,11 @@ void encwrite(register void *starta, unsigned int size, register FILE *outf)
 /*
  * perform an encrypted read
  */
-int encread(register void *starta, unsigned int size, register int inf)
+int encread(void *starta, unsigned int size, int inf)
 {
-    register char *ep;
-    register int read_size;
-    register char *start = (char* ) starta;
+    char *ep;
+    int read_size;
+    char *start = (char* ) starta;
 
     if ((read_size = read(inf, start, size)) == -1 || read_size == 0)
 	return read_size;

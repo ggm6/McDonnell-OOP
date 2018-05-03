@@ -31,9 +31,9 @@ char readchar();
 void wait_for(char ch);
 void status();
 void flush_type();
-void show_win(WINDOW *scr, char *message);
-void do_daemons(register int flag);
-void do_fuses(register int flag);
+void show_win(WINDOW *scr, const char *message);
+void do_daemons(int flag);
+void do_fuses(int flag);
 void look(bool wakeup);
 void shell();
 void do_move(int dy, int dx);
@@ -68,46 +68,46 @@ void new_level();
 int teleport();
 void add_pass();
 void raise_level();
-void init_weapon(register struct object *weap, char type);
-void add_pack(register struct linked_list *item, bool silent);
+void init_weapon(struct object *weap, char type);
+void add_pack(struct linked_list *item, bool silent);
 void pick_up(char ch);
-int rnd(register int range);
+int rnd(int range);
 int teleport();
 void score(int amount, int flags, char monst);
 void total_winner();
-int get_str(register char *opt, WINDOW *win);
+int get_str(char *opt, WINDOW *win);
 void daemon(int (*func)(), int arg, int type);
-int roll(register int number, int sides);
+int roll(int number, int sides);
 void wanderer();
 void kill_daemon(int (*func)());
-void do_fuses(register int flag);
+void do_fuses(int flag);
 void extinguish(int (*func)());
-int ring_eat(register int hand);
+int ring_eat(int hand);
 void fuse(int (*func)(), int arg, int time, int type);
 bool roll_em(struct stats *att, struct stats *def, struct object *weap, bool hurl);
-void thunk(register struct object *weap, register char *mname);
-void hit(register char *er, register char *ee);
-void bounce(register struct object *weap, register char *mname);
-void killed(register struct linked_list *item, bool pr);
-void miss(register const char *er, register const char *ee);
-void death(register char monst);
+void thunk(struct object *weap, char *mname);
+void hit(char *er, char *ee);
+void bounce(struct object *weap, char *mname);
+void killed(struct linked_list *item, bool pr);
+void miss(const char *er, const char *ee);
+void death(char monst);
 bool save(int which);
-void chg_str(register int amt);
-bool is_magic(register struct object *obj);
-void discard(register struct linked_list *item);
+void chg_str(int amt);
+bool is_magic(struct object *obj);
+void discard(struct linked_list *item);
 bool swing(int at_lvl, int op_arm, int wplus);
-int str_plus(register str_t *str);
-int add_dam( register str_t *str);
-bool fallpos(register coord *pos, coord *newpos, register bool passages);
+int str_plus(str_t *str);
+int add_dam( str_t *str);
+bool fallpos(coord *pos, coord *newpos, bool passages);
 void light(coord *cp);
-void fall(register struct linked_list *item, bool pr);
-void badcheck(char *name, register struct magic_item *magic, register int bound);
+void fall(struct linked_list *item, bool pr);
+void badcheck(char *name, struct magic_item *magic, int bound);
 void fatal(char *s);
-void strucpy(register char *s1, char *s2, register int len);
-void parse_opts(register char *str);
+void strucpy(char *s1, char *s2, int len);
+void parse_opts(char *str);
 bool too_much();
 bool author();
-bool restore(register char *file, char **envp);
+bool restore(char *file, char **envp);
 void init_player();
 void init_names();
 void init_things();
@@ -119,38 +119,38 @@ void playit();
 void command();
 int ucount();
 void chmsg(char *fmt, int arg);
-char show(register int y, int x);
-char secretdoor(register int y, int x);
+char show(int y, int x);
+char secretdoor(int y, int x);
 void check_level();
-void runto(register coord *runner, coord *spot);
+void runto(coord *runner, coord *spot);
 int rnd_room();
-void rnd_pos(register struct room *rp, register coord *cp);
+void rnd_pos(struct room *rp, coord *cp);
 void lengthen(int (*func)(), int xtime);
-void remove_monster(register coord *mp, register struct linked_list *item);
-bool diag_ok(register coord *sp, coord *ep);
-char be_trapped(register coord *tc);
-bool fight(register coord *mp, char mn, struct object *weap, bool thrown);
+void remove_monster(coord *mp, struct linked_list *item);
+bool diag_ok(coord *sp, coord *ep);
+char be_trapped(coord *tc);
+bool fight(coord *mp, char mn, struct object *weap, bool thrown);
 void do_rooms();
 void do_passages();
 void put_things();
-char pack_char(register struct object *obj);
+char pack_char(struct object *obj);
 void money();
 void conn(int r1, int r2);
-void door(register struct room *rm, register coord *cp);
+void door(struct room *rm, coord *cp);
 void add_haste(bool potion);
-bool is_current(register struct object *obj);
+bool is_current(struct object *obj);
 int gethand();
 void aggravate();
-bool dropcheck(register struct object *op);
-char * killname(register char monst);
-int encread(register void *starta, unsigned int size, register int inf);
-void encwrite(register void *starta, unsigned int size, register FILE *outf);
-void draw_room(register struct room *rp);
+bool dropcheck(struct object *op);
+char * killname(char monst);
+int encread(void *starta, unsigned int size, int inf);
+void encwrite(void *starta, unsigned int size, FILE *outf);
+void draw_room(struct room *rp);
 char randmonster(bool wander);
-void new_monster(struct linked_list *item, char type, register coord *cp);
-void horiz(register int cnt);
-void vert(register int cnt);
-void save_file(register FILE *savef);
+void new_monster(struct linked_list *item, char type, coord *cp);
+void horiz(int cnt);
+void vert(int cnt);
+void save_file(FILE *savef);
 int rs_save_file(FILE *savef);
 int rs_restore_file(int inf);
 void genocide();
@@ -158,11 +158,11 @@ int rs_read_stats(int inf, struct stats *s);
 int rs_write_str_t(FILE *savef, str_t *st);
 int rs_read_str_t(int inf, str_t *st);
 void drain(int ymin, int ymax, int xmin, int xmax);
-void do_motion(register struct object *obj, register int ydelta, int xdelta);
+void do_motion(struct object *obj, int ydelta, int xdelta);
 bool save_throw(int which, struct thing *tp);
-bool hit_monster(register int y, int x, struct object *obj);
-bool cansee(register int y, int x);
-void fix_stick(register struct object *cur);
+bool hit_monster(int y, int x, struct object *obj);
+bool cansee(int y, int x);
+void fix_stick(struct object *cur);
 
 /*
  * Rogue definitions and variable declarations
@@ -198,7 +198,7 @@ void fix_stick(register struct object *cur);
  && (cp)->y <= (rp)->r_pos.y + ((rp)->r_max.y - 1) && (rp)->r_pos.y <= (cp)->y)
 #define winat(y, x) (mvwinch(mw,y,x)==' '?mvwinch(stdscr,y,x):winch(mw))
 #define debug if (wizard) msg
-#define RN (((seed = seed*11109+13849) & 0x7fff) >> 1)
+#define RN  (((seed = seed*11109+13849) & 0x7fff) >> 1)
 #define unc(cp) (cp).y, (cp).x
 #define cmov(xy) move((xy).y, (xy).x)
 #define DISTANCE(y1, x1, y2, x2) ((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1))
@@ -212,11 +212,11 @@ void fix_stick(register struct object *cur);
 #define hero player.t_pos
 #define pstats player.t_stats
 #define pack player.t_pack
-extern void _attach(register struct linked_list **list, register struct linked_list *item);
+extern void _attach(struct linked_list **list, struct linked_list *item);
 #define attach(a,b) _attach(&a,b)
-extern void _detach(register struct linked_list **list, register struct linked_list *item);
+extern void _detach(struct linked_list **list, struct linked_list *item);
 #define detach(a,b) _detach(&a,b)
-extern void _free_list(register struct linked_list **ptr);
+extern void _free_list(struct linked_list **ptr);
 #define free_list(a) _free_list(&a)
 #ifndef max
 #define max(a, b) ((a) > (b) ? (a) : (b))
@@ -431,19 +431,8 @@ extern void _free_list(register struct linked_list **ptr);
 /*
  * Now we define the structures and types
  */
-
-/*
- * Help list
- */
-
-struct h_list {
-    char h_ch;
-    char *h_desc;
-};
-
-extern struct h_list helpstr[];
-
-/*
+ 
+ /*
  * Linked list data type
  */
 struct linked_list {
@@ -451,42 +440,8 @@ struct linked_list {
     struct linked_list *l_prev;
     char *l_data;			/* Various structure pointers */
 };
-
-/*
- * Stuff about magic items
- */
-
-struct magic_item {
-    char mi_name[30];
-    int mi_prob;
-    int mi_worth;
-};
-
-/*
- * Room structure
- */
-struct room {
-    coord r_pos;			/* Upper left corner */
-    coord r_max;			/* Size of room */
-    coord r_gold;			/* Where the gold is */
-    int r_goldval;			/* How much the gold is worth */
-    int r_flags;			/* Info about the room */
-    int r_nexits;			/* Number of exits */
-    coord r_exit[4];			/* Where the exits are */
-};
-
-/*
- * Array of all traps on this level
- */
-struct trap {
-    coord tr_pos;			/* Where trap is */
-    char tr_type;			/* What kind of trap */
-    int tr_flags;			/* Info about trap (i.e. ISFOUND) */
-};
-
-extern struct trap  traps[MAXTRAPS];
-
-/*
+ 
+ /*
  * Structure describing a fighting being
  */
 struct stats {
@@ -495,12 +450,15 @@ struct stats {
     int s_lvl;				/* Level of mastery */
     int s_arm;				/* Armor class */
     int s_hpt;				/* Hit points */
-    char s_dmg[30];			/* String describing damage done */
+    char* s_dmg;			/* String describing damage done */
+    stats(str_t a, long b, int c, int d, int e, char* f) : s_str(a), s_exp(b), s_lvl(c), s_arm(d), s_hpt(e), s_dmg(f) {};
+    stats() {};
 };
-
-/*
+ 
+ /*
  * Structure for monsters and player
  */
+ 
 struct thing {
     coord t_pos;			/* Position */
     bool t_turn;			/* If slowed, is it a turn to move */
@@ -512,16 +470,7 @@ struct thing {
     struct stats t_stats;		/* Physical description */
     struct linked_list *t_pack;		/* What the thing is carrying */
 	int t_reserved;         /* reserved for save/restore code */
-};
-
-/*
- * Array containing information on all the various types of mosnters
- */
-struct monster {
-    char m_name[20];			/* What to call the monster */
-    short m_carry;			/* Probability of carrying something */
-    short m_flags;			/* Things about the monster */
-    struct stats m_stats;		/* Initial stats */
+	thing() {};
 };
 
 /*
@@ -541,6 +490,64 @@ struct object {
     int o_ac;				/* Armor class */
     int o_flags;			/* Information about objects */
     int o_group;			/* Group number for this object */
+};
+
+/*
+ * Stuff about magic items
+ */
+
+struct magic_item : public object {  // INHERITANCE
+    char* mi_name;
+    int mi_prob;
+    int mi_worth;
+    magic_item(char* a, int b, int c) : mi_name(a), mi_prob(b), mi_worth(c) {};
+    magic_item(char* a, int b) : mi_name(a), mi_prob(b) {};
+};
+
+/*
+ * Array of all traps on this level
+ */
+struct trap : public object {  // INHERITANCE
+    coord tr_pos;			/* Where trap is */
+    char tr_type;			/* What kind of trap */
+    int tr_flags;			/* Info about trap (i.e. ISFOUND) */
+};
+
+extern struct trap  traps[MAXTRAPS];
+
+/*
+ * Help list
+ */
+
+struct h_list {
+    char h_ch;
+    char *h_desc;
+};
+
+extern struct h_list helpstr[];
+
+/*
+ * Room structure
+ */
+struct room {
+    coord r_pos;			/* Upper left corner */
+    coord r_max;			/* Size of room */
+    coord r_gold;			/* Where the gold is */
+    int r_goldval;			/* How much the gold is worth */
+    int r_flags;			/* Info about the room */
+    int r_nexits;			/* Number of exits */
+    coord r_exit[4];			/* Where the exits are */
+};
+
+/*
+ * Array containing information on all the various types of monsters
+ */
+struct monster : public thing {  // INHERITANCE- "things" are defined as types of players and monsters
+    char* m_name;			/* What to call the monster */
+    short m_carry;			/* Probability of carrying something */
+    short m_flags;			/* Things about the monster */
+    struct stats m_stats;		/* Initial stats */
+    monster(char* x, short y, short z, struct stats a) : m_name(x), m_carry(y), m_flags(z), m_stats(a) {};
 };
 
 struct words {
@@ -663,16 +670,16 @@ extern int num_checks;
 extern char lvl_mons[27],wand_mons[27];
 extern coord nh;
 
-struct linked_list *find_mons(register int y, int x), *find_obj(register int y, int x), *get_item(const char *purpose, int type), *new_item(int size);
+struct linked_list *find_mons(int y, int x), *find_obj(int y, int x), *get_item(const char *purpose, int type), *new_item(int size);
 struct linked_list *new_thing(), *wake_monster(int y, int x);
 
 // GARRETT'S CHANGE: C does not use new as keyword, new is being used as a variable
 char *getenv(), *new_var(int size);
 const char * tr_name(char ch);
-char *charge_str(register struct object *obj),*vowelstr(register char *str), *inv_name(register struct object *obj, register bool drop), *strcat();
-char *num(register int n1, register int n2), *ring_num(register struct object *obj);
+char *charge_str(struct object *obj),*vowelstr(char *str), *inv_name(struct object *obj, bool drop), *strcat();
+char *num(int n1, int n2), *ring_num(struct object *obj);
 
-struct room * roomin(register coord *cp);
+struct room * roomin(coord *cp);
 
 coord * rndmove(struct thing *who);
 

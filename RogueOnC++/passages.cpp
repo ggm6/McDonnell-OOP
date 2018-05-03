@@ -14,9 +14,9 @@
 
 void do_passages()
 {
-    register struct rdes *r1, *r2;
-    register int i, j;
-    register int roomcount;
+    struct rdes *r1, *r2;
+    int i, j;
+    int roomcount;
     static struct rdes
     {
 	bool	conn[MAXROOMS];		/* possible to connect to room i? */
@@ -122,11 +122,11 @@ void do_passages()
 
 void conn(int r1, int r2)
 {
-    register struct room *rpf, *rpt;
-    register char rmt;
-    register int distance, turn_spot, turn_distance;
-    register int rm;
-    register char direc;
+    struct room *rpf, *rpt;
+    char rmt;
+    int distance, turn_spot, turn_distance;
+    int rm;
+    char direc;
     coord delta, curr, turn_delta, spos, epos;
 
     if (r1 < r2)
@@ -255,7 +255,7 @@ void conn(int r1, int r2)
  * also enters the door in the exits array of the room.
  */
 
-void door(register struct room *rm, register coord *cp)
+void door(struct room *rm, coord *cp)
 {
     cmov(*cp);
     addch(rnd(10) < level - 1 && rnd(100) < 20 ? SECRETDOOR : DOOR);
@@ -268,7 +268,7 @@ void door(register struct room *rm, register coord *cp)
 
 void add_pass()
 {
-    register int y, x, ch;
+    int y, x, ch;
 
     for (y = 1; y < LINES - 2; y++)
 	for (x = 0; x < COLS; x++)

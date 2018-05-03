@@ -34,7 +34,7 @@ void do_run(char ch)
 
 void do_move(int dy, int dx)
 {
-    register char ch;
+    char ch;
 
     firstmove = FALSE;
     if (no_move)
@@ -131,10 +131,10 @@ move_stuff:
 
 void light(coord *cp)
 {
-    register struct room *rp;
-    register int j, k;
-    register char ch, rch;
-    register struct linked_list *item;
+    struct room *rp;
+    int j, k;
+    char ch, rch;
+    struct linked_list *item;
 
     if ((rp = roomin(cp)) != NULL && !on(player, ISBLIND))
     {
@@ -196,11 +196,11 @@ void light(coord *cp)
  *	returns what a certain thing will display as to the un-initiated
  */
 
-char show(register int y, int x)
+char show(int y, int x)
 {
-    register char ch = winat(y, x);
-    register struct linked_list *it;
-    register struct thing *tp;
+    char ch = winat(y, x);
+    struct linked_list *it;
+    struct thing *tp;
 
     if (ch == TRAP)
 	return (trap_at(y, x)->tr_flags & ISFOUND) ? TRAP : FLOOR;
@@ -225,10 +225,10 @@ char show(register int y, int x)
  *	The guy stepped on a trap.... Make him pay.
  */
 
-char be_trapped(register coord *tc)
+char be_trapped(coord *tc)
 {
-    register struct trap *tp;
-    register char ch;
+    struct trap *tp;
+    char ch;
 
     tp = trap_at(tc->y, tc->x);
     count = running = FALSE;
@@ -258,8 +258,8 @@ char be_trapped(register coord *tc)
 	    }
 	    else
 	    {
-		register struct linked_list *item;
-		register struct object *arrow;
+		struct linked_list *item;
+		struct object *arrow;
 
 		msg("An arrow shoots past you.");
 		item = new_item(sizeof *arrow);
@@ -299,9 +299,9 @@ char be_trapped(register coord *tc)
  *	find the trap at (y,x) on screen.
  */
 
-struct trap * trap_at(register int y, int x)
+struct trap * trap_at(int y, int x)
 {
-    register struct trap *tp, *ep;
+    struct trap *tp, *ep;
 
     ep = &traps[ntraps];
     for (tp = traps; tp < ep; tp++)
@@ -322,11 +322,11 @@ struct trap * trap_at(register int y, int x)
 
 coord * rndmove(struct thing *who)
 {
-    register int x, y;
-    register char ch;
-    register int ex, ey, nopen = 0;
-    register struct linked_list *item;
-    register struct object *obj;
+    int x, y;
+    char ch;
+    int ex, ey, nopen = 0;
+    struct linked_list *item;
+    struct object *obj;
     static coord ret;  /* what we will be returning */
     static coord dest;
 

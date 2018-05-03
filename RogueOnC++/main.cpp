@@ -22,12 +22,12 @@ WINDOW *cw;                              /* Window that the player sees */
 WINDOW *hw;                              /* Used for the help command */
 WINDOW *mw;                              /* Used to store mosnters */
 
-main(int argc, char **argv, char **envp)
+int main(int argc, char **argv, char **envp)
 {
-    register char *env;
-    register struct passwd *pw;
-    register struct linked_list *item;
-    register struct object *obj;
+    char *env;
+    struct passwd *pw;
+    struct linked_list *item;
+    struct object *obj;
     struct passwd *getpwuid(uid_t uid);
     char *getpass(const char* x), *xcrypt(const char* x, const char* y);
     int lowtime;
@@ -74,10 +74,12 @@ main(int argc, char **argv, char **envp)
     if ((env = getenv("ROGUEOPTS")) != NULL)
 	parse_opts(env);
     if (env == NULL || whoami[0] == '\0')
-	if ((pw = getpwuid(getuid())) == NULL)
-	{
-	    printf("Say, who the hell are you?\n");
-	    exit(1);
+    {
+		if ((pw = getpwuid(getuid())) == NULL)
+		{
+			printf("Say, who the hell are you?\n");
+			exit(1);
+		}
 	}
 	else
 	    strucpy(whoami, pw->pw_name, strlen(pw->pw_name));
@@ -218,7 +220,7 @@ main(int argc, char **argv, char **envp)
 
 void endit(int p)
 {
-    fatal("Ok, if you want to exit that badly, I'll have to allow it\n");
+    fatal((char* ) "Ok, if you want to exit that badly, I'll have to allow it\n");
 }
 
 /*
@@ -241,7 +243,7 @@ void fatal(char *s)
  *	Pick a very random number.
  */
 
-int rnd(register int range)
+int rnd(int range)
 {
     return range == 0 ? 0 : abs(RN) % range;
 }
@@ -251,9 +253,9 @@ int rnd(register int range)
  *	roll a number of dice
  */
 
-int roll(register int number, int sides)
+int roll(int number, int sides)
 {
-    register int dtotal = 0;
+    int dtotal = 0;
 
     while(number--)
 	dtotal += rnd(sides)+1;
@@ -331,7 +333,7 @@ void setup()
 
 void playit()
 {
-    register char *opts;
+    char *opts;
 
     /*
      * set up defaults for slow terminals
@@ -393,9 +395,9 @@ bool author()
 #ifdef CHECKTIME
 void checkout(int p)
 {
-    static char *msgs[] = {
-	"The load is too high to be playing.  Please leave in %d minutes",
-	"Please save your game.  You have %d minutes",
+    static char *msgs[] = {(char* )
+	"The load is too high to be playing.  Please leave in %d minutes", (char* )
+	"Please save your game.  You have %d minutes", (char* )
 	"Last warning.  You have %d minutes to leave",
     };
     int checktime;
@@ -404,7 +406,7 @@ void checkout(int p)
     if (too_much())
     {
 	if (num_checks == 3)
-	    fatal("Sorry.  You took to long.  You are dead\n");
+	    fatal((char* ) "Sorry.  You took to long.  You are dead\n");
 	checktime = CHECKTIME / (num_checks + 1);
 	chmsg(msgs[num_checks++], checktime);
 	alarm(checktime * 60);
@@ -413,7 +415,7 @@ void checkout(int p)
     {
 	if (num_checks)
 	{
-	    chmsg("The load has dropped back down.  You have a reprieve.",0);
+	    chmsg((char* ) "The load has dropped back down.  You have a reprieve.",0);
 	    num_checks = 0;
 	}
 	alarm(CHECKTIME * 60);
@@ -447,9 +449,9 @@ struct nlist avenrun[] =
     {0,0,0,0,0,0}
 };
 
-int loadav(register double *avg)
+int loadav(double *avg)
 {
-    register int kmem;
+    int kmem;
 	int av[3];
     if ((kmem = open("/dev/kmem", 0)) < 0)
 	goto bad;

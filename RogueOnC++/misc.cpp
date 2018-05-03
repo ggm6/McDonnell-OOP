@@ -15,7 +15,7 @@
 
 const char * tr_name(char ch)
 {
-    register const char *s;
+    const char *s;
 
     switch (ch)
     {
@@ -42,13 +42,13 @@ const char * tr_name(char ch)
 
 void look(bool wakeup)
 {
-    register int x, y;
-    register char ch;
-    register int oldx, oldy;
-    register bool inpass;
-    register int passcount = 0;
-    register struct room *rp;
-    register int ey, ex;
+    int x, y;
+    char ch;
+    int oldx, oldy;
+    bool inpass;
+    int passcount = 0;
+    struct room *rp;
+    int ey, ex;
 
     getyx(cw, oldy, oldx);
     if (oldrp != NULL && (oldrp->r_flags & ISDARK) && off(player, ISBLIND))
@@ -68,8 +68,8 @@ void look(bool wakeup)
 		continue;
 	    if (isupper(mvwinch(mw, y, x)))
 	    {
-		register struct linked_list *it;
-		register struct thing *tp;
+		struct linked_list *it;
+		struct thing *tp;
 
 		if (wakeup)
 		    it = wake_monster(y, x);
@@ -164,11 +164,11 @@ void look(bool wakeup)
  *	Figure out what a secret door looks like.
  */
 
-char secretdoor(register int y, int x)
+char secretdoor(int y, int x)
 {
-    register int i;
-    register struct room *rp;
-    register coord *cpp;
+    int i;
+    struct room *rp;
+    coord *cpp;
     static coord cp;
 
     cp.y = y;
@@ -189,10 +189,10 @@ char secretdoor(register int y, int x)
  *	find the unclaimed object at y, x
  */
 
-struct linked_list * find_obj(register int y, int x)
+struct linked_list * find_obj(int y, int x)
 {
-    register struct linked_list *obj;
-    register struct object *op;
+    struct linked_list *obj;
+    struct object *op;
 
     for (obj = lvl_obj; obj != NULL; obj = next(obj))
     {
@@ -212,8 +212,8 @@ struct linked_list * find_obj(register int y, int x)
 
 void eat()
 {
-    register struct linked_list *item;
-    register struct object *obj;
+    struct linked_list *item;
+    struct object *obj;
 
     if ((item = get_item("eat", FOOD)) == NULL)
 	return;
@@ -255,7 +255,7 @@ void eat()
  * it keeps track of the highest it has been, just in case
  */
 
-void chg_str(register int amt)
+void chg_str(int amt)
 {
     if (amt == 0)
 	return;
@@ -331,7 +331,7 @@ void add_haste(bool potion)
 
 void aggravate()
 {
-    register struct linked_list *mi;
+    struct linked_list *mi;
 
     for (mi = mlist; mi != NULL; mi = next(mi))
 	runto(&((struct thing *) ldata(mi))->t_pos, &hero);
@@ -340,7 +340,7 @@ void aggravate()
 /*
  * for printfs: if string starts with a vowel, return "n" for an "an"
  */
-char * vowelstr(register char *str)
+char * vowelstr(char *str)
 {
     switch (*str)
     {
@@ -349,16 +349,16 @@ char * vowelstr(register char *str)
 	case 'i':
 	case 'o':
 	case 'u':
-	    return "n";
+	    return (char* ) "n";
 	default:
-	    return "";
+	    return (char* ) "";
     }
 }
 
 /* 
  * see if the object is one of the currently used items
  */
-bool is_current(register struct object *obj)
+bool is_current(struct object *obj)
 {
     if (obj == NULL)
 	return FALSE;
@@ -376,13 +376,13 @@ bool is_current(register struct object *obj)
  */
 bool get_dir()
 {
-    register char *prompt;
-    register bool gotit;
+    char *prompt;
+    bool gotit;
 
     if (!terse)
-	msg(prompt = "Which direction? ");
+	msg(prompt = (char* ) "Which direction? ");
     else
-	prompt = "Direction: ";
+	prompt = (char* ) "Direction: ";
     do
     {
 	gotit = TRUE;

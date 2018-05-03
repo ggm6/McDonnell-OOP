@@ -8,14 +8,14 @@
 #include "rogue.hpp"
 
 int runners();
-int do_chase(register struct thing *th);
-struct room * roomin(register coord *cp);
+int do_chase(struct thing *th);
+struct room * roomin(coord *cp);
 bool chase(struct thing *tp, coord *ee);
-struct linked_list * find_mons(register int y, int x);
-bool diag_ok(register coord *sp, coord *ep);
-int attack(register struct thing *mp);
-bool cansee(register int y, int x);
-int rnd(register int range);
+struct linked_list * find_mons(int y, int x);
+bool diag_ok(coord *sp, coord *ep);
+int attack(struct thing *mp);
+bool cansee(int y, int x);
+int rnd(int range);
 
 coord ch_ret;				/* Where chasing takes you */
 
@@ -26,8 +26,8 @@ coord ch_ret;				/* Where chasing takes you */
 
 int runners()
 {
-    register struct linked_list *item;
-    register struct thing *tp;
+    struct linked_list *item;
+    struct thing *tp;
 
     for (item = mlist; item != NULL;)
     {
@@ -51,12 +51,12 @@ int runners()
  *	Make one thing chase another.
  */
 
-int do_chase(register struct thing *th)
+int do_chase(struct thing *th)
 {
-    register struct room *rer, *ree;	/* room of chaser, room of chasee */
-    register int mindist = 32767, i, dist;
-    register bool stoprun = FALSE;	/* TRUE means we are there */
-    register char sch;
+    struct room *rer, *ree;	/* room of chaser, room of chasee */
+    int mindist = 32767, i, dist;
+    bool stoprun = FALSE;	/* TRUE means we are there */
+    char sch;
     coord temp;				/* Temporary destination for chaser */
 
     rer = roomin(&th->t_pos);	/* Find room of chaser */
@@ -128,10 +128,10 @@ int do_chase(register struct thing *th)
  *	or stop it from running (for when it dies)
  */
 
-void runto(register coord *runner, coord *spot)
+void runto(coord *runner, coord *spot)
 {
-    register struct linked_list *item;
-    register struct thing *tp;
+    struct linked_list *item;
+    struct thing *tp;
 
     /*
      * If we couldn't find him, something is funny
@@ -156,12 +156,12 @@ void runto(register coord *runner, coord *spot)
 
 bool chase(struct thing *tp, coord *ee)
 {
-    register int x, y;
-    register int dist, thisdist;
-    register struct linked_list *item;
-    register struct object *obj;
-    register coord *er = &tp->t_pos;
-    register char ch;
+    int x, y;
+    int dist, thisdist;
+    struct linked_list *item;
+    struct object *obj;
+    coord *er = &tp->t_pos;
+    char ch;
 
     /*
      * If the thing is confused, let it move randomly. Invisible
@@ -188,7 +188,7 @@ bool chase(struct thing *tp, coord *ee)
      */
     else
     {
-	register int ey, ex;
+	int ey, ex;
 	/*
 	 * This will eventually hold where we move to get closer
 	 * If we can't find an empty spot, we stay where we are.
@@ -247,9 +247,9 @@ bool chase(struct thing *tp, coord *ee)
  *	in any room.
  */
 
-struct room * roomin(register coord *cp)
+struct room * roomin(coord *cp)
 {
-    register struct room *rp;
+    struct room *rp;
 
     for (rp = rooms; rp < &rooms[MAXROOMS]; rp++)
 	if (inroom(rp, cp))
@@ -262,10 +262,10 @@ struct room * roomin(register coord *cp)
  *	Find the monster from his corrdinates
  */
 
-struct linked_list * find_mons(register int y, int x)
+struct linked_list * find_mons(int y, int x)
 {
-    register struct linked_list *item;
-    register struct thing *th;
+    struct linked_list *item;
+    struct thing *th;
 
     for (item = mlist; item != NULL; item = next(item))
     {
@@ -281,7 +281,7 @@ struct linked_list * find_mons(register int y, int x)
  *	Check to see if the move is legal if it is diagonal
  */
 
-bool diag_ok(register coord *sp, coord *ep)
+bool diag_ok(coord *sp, coord *ep)
 {
     if (ep->x == sp->x || ep->y == sp->y)
 	return TRUE;
@@ -293,9 +293,9 @@ bool diag_ok(register coord *sp, coord *ep)
  *	returns true if the hero can see a certain coordinate.
  */
 
-bool cansee(register int y, int x)
+bool cansee(int y, int x)
 {
-    register struct room *rer;
+    struct room *rer;
     coord tp;
 
     if (on(player, ISBLIND))

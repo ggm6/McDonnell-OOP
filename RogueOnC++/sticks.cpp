@@ -9,7 +9,7 @@
 #include <ctype.h>
 #include "rogue.hpp"
 
-void fix_stick(register struct object *cur)
+void fix_stick(struct object *cur)
 {
     if (strcmp(ws_type[cur->o_which], "staff") == 0)
 	strcpy(cur->o_damage,"2d3");
@@ -31,11 +31,11 @@ void fix_stick(register struct object *cur)
 
 void do_zap(bool gotdir)
 {
-    register struct linked_list *item;
-    register struct object *obj;
-    register struct room *rp;
-    register struct thing *tp;
-    register int y, x;
+    struct linked_list *item;
+    struct object *obj;
+    struct room *rp;
+    struct thing *tp;
+    int y, x;
 
     if ((item = get_item("zap with", STICK)) == NULL)
 	return;
@@ -99,8 +99,8 @@ void do_zap(bool gotdir)
 	case WS_TELTO:
 	case WS_CANCEL:
 	{
-	    register char monster, oldch;
-	    register int rm;
+	    char monster, oldch;
+	    int rm;
 
 	    y = hero.y;
 	    x = hero.x;
@@ -111,7 +111,7 @@ void do_zap(bool gotdir)
 	    }
 	    if (isupper(monster = mvwinch(mw, y, x)))
 	    {
-		register char omonst = monster;
+		char omonst = monster;
 
 		if (monster == 'F')
 		    player.t_flags &= ~ISHELD;
@@ -181,7 +181,7 @@ void do_zap(bool gotdir)
 	}
 	when WS_HIT:
 	{
-	    register char ch;
+	    char ch;
 
 	    delta.y += hero.y;
 	    delta.x += hero.x;
@@ -237,8 +237,8 @@ void do_zap(bool gotdir)
 	case WS_FIRE:
 	case WS_COLD:
 	{
-	    register char dirch, ch, *name;
-	    register bool bounced, used;
+	    char dirch, ch, *name;
+	    bool bounced, used;
 	    coord pos;
 	    coord spotpos[BOLT_LENGTH];
 	    static struct object bolt =
@@ -257,11 +257,11 @@ void do_zap(bool gotdir)
 	    bounced = FALSE;
 	    used = FALSE;
 	    if (obj->o_which == WS_ELECT)
-		name = "bolt";
+		name = (char* ) "bolt";
 	    else if (obj->o_which == WS_FIRE)
-		name = "flame";
+		name = (char* ) "flame";
 	    else
-		name = "ice";
+		name = (char* ) "ice";
 	    for (y = 0; y < BOLT_LENGTH && !used; y++)
 	    {
 		ch = winat(pos.y, pos.x);
@@ -336,9 +336,9 @@ void do_zap(bool gotdir)
 
 void drain(int ymin, int ymax, int xmin, int xmax)
 {
-    register int i, j, count;
-    register struct thing *ick;
-    register struct linked_list *item;
+    int i, j, count;
+    struct thing *ick;
+    struct linked_list *item;
 
     /*
      * First count how many things we need to spread the hit points among
@@ -372,7 +372,7 @@ void drain(int ymin, int ymax, int xmin, int xmax)
 /*
  * charge a wand for wizards.
  */
-char * charge_str(register struct object *obj)
+char * charge_str(struct object *obj)
 {
     static char buf[20];
 

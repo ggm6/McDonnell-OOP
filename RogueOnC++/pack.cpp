@@ -14,11 +14,11 @@
  * use it as the linked_list pointer instead of gettting it off the ground.
  */
  
-void add_pack(register struct linked_list *item, bool silent)
+void add_pack(struct linked_list *item, bool silent)
 {
-    register struct linked_list *ip, *lp;
-    register struct object *obj, *op;
-    register bool exact, from_floor;
+    struct linked_list *ip, *lp;
+    struct object *obj, *op;
+    bool exact, from_floor;
 
     if (item == NULL)
     {
@@ -185,9 +185,9 @@ picked_up:
  */
 bool inventory(struct linked_list *list, int type)
 {
-    register struct object *obj;
-    register char ch;
-    register int n_objs;
+    struct object *obj;
+    char ch;
+    int n_objs;
     char inv_temp[80];
 
     n_objs = 0;
@@ -288,8 +288,8 @@ void pick_up(char ch)
  */
 void picky_inven()
 {
-    register struct linked_list *item;
-    register char ch, mch;
+    struct linked_list *item;
+    char ch, mch;
 
     if (pack == NULL)
 	msg("You aren't carrying anything");
@@ -322,8 +322,8 @@ void picky_inven()
  */
 struct linked_list * get_item(const char *purpose, int type)
 {
-    register struct linked_list *obj;
-    register char ch, och;
+    struct linked_list *obj;
+    char ch, och;
 
     if (pack == NULL)
 	msg("You aren't carrying anything.");
@@ -373,10 +373,10 @@ struct linked_list * get_item(const char *purpose, int type)
     return NULL;
 }
 
-char pack_char(register struct object *obj)
+char pack_char(struct object *obj)
 {
-    register struct linked_list *item;
-    register char c;
+    struct linked_list *item;
+    char c;
 
     c = 'a';
     for (item = pack; item != NULL; item = next(item))

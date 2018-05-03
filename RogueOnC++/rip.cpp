@@ -16,33 +16,33 @@
 #include "rogue.hpp"
 
 static char *rip[] = {
-"                       __________",
-"                      /          \\",
-"                     /    REST    \\",
-"                    /      IN      \\",
-"                   /     PEACE      \\",
-"                  /                  \\",
-"                  |                  |",
-"                  |                  |",
-"                  |   killed by a    |",
-"                  |                  |",
-"                  |       1980       |",
-"                 *|     *  *  *      | *",
-"         ________)/\\\\_//(\\/(/\\)/\\//\\/|_)_______",
+(char* ) "                       __________",
+(char* ) "                      /          \\",
+(char* ) "                     /    REST    \\",
+(char* ) "                    /      IN      \\",
+(char* ) "                   /     PEACE      \\",
+(char* ) "                  /                  \\",
+(char* ) "                  |                  |",
+(char* ) "                  |                  |",
+(char* ) "                  |   killed by a    |",
+(char* ) "                  |                  |",
+(char* ) "                  |       1980       |",
+(char* ) "                 *|     *  *  *      | *",
+(char* ) "         ________)/\\\\_//(\\/(/\\)/\\//\\/|_)_______",
     0
 };
 
-char * killname(register char monst);
+char * killname(char monst);
 
 /*
  * death:
  *	Do something really fun when he dies
  */
 
-void death(register char monst)
+void death(char monst)
 {
-    register char **dp = rip, *killer;
-    register struct tm *lt;
+    char **dp = rip, *killer;
+    struct tm *lt;
     time_t date;
     char buf[80];
     struct tm *localtime(const time_t*);
@@ -84,16 +84,16 @@ void score(int amount, int flags, char monst)
 	int sc_uid;
 	char sc_monster;
     } top_ten[10];
-    register struct sc_ent *scp;
-    register int i;
-    register struct sc_ent *sc2;
-    register FILE *outf;
-    register char *killer;
-    register int prflags = 0;
-    register int fd;
-    static char *reason[] = {
-	"killed",
-	"quit",
+    struct sc_ent *scp;
+    int i;
+    struct sc_ent *sc2;
+    FILE *outf;
+    char *killer;
+    int prflags = 0;
+    int fd;
+    static char *reason[] = { (char* ) 
+	"killed", (char* )
+	"quit", (char* )
 	"A total winner",
     };
 
@@ -126,11 +126,13 @@ void score(int amount, int flags, char monst)
 	fgets(prbuf,80,stdin);
     }
     if (wizard)
+    {
 	if (strcmp(prbuf, "names") == 0)
 	    prflags = 1;
 	else if (strcmp(prbuf, "edit") == 0)
 	    prflags = 2;
     encread((char *) top_ten, sizeof top_ten, fd);
+}
     /*
      * Insert her in list if need be
      */
@@ -160,7 +162,7 @@ void score(int amount, int flags, char monst)
     printf("\nTop Ten Adventurers:\nRank\tScore\tName\n");
     for (scp = top_ten; scp <= &top_ten[9]; scp++) {
 	if (scp->sc_score) {
-	    printf("%d\t%d\t%s: %s on level %d", scp - top_ten + 1,
+	    printf("%d\t%d\t%s: %s on level %d", (int) (scp - top_ten + 1),
 		scp->sc_score, scp->sc_name, reason[scp->sc_flags],
 		scp->sc_level);
 	    if (scp->sc_flags == 0) {
@@ -212,11 +214,11 @@ void score(int amount, int flags, char monst)
 
 void total_winner()
 {
-    register struct linked_list *item;
-    register struct object *obj;
-    register int worth;
-    register char c;
-    register int oldpurse;
+    struct linked_list *item;
+    struct object *obj;
+    int worth;
+    char c;
+    int oldpurse;
 
     clear();
     standout();
@@ -296,10 +298,12 @@ void total_winner()
 		worth = r_magic[obj->o_which].mi_worth;
 		if (obj->o_which == R_ADDSTR || obj->o_which == R_ADDDAM ||
 		    obj->o_which == R_PROTECT || obj->o_which == R_ADDHIT)
-			if (obj->o_ac > 0)
-			    worth += obj->o_ac * 20;
-			else
-			    worth = 50;
+		    {
+				if (obj->o_ac > 0)
+					worth += obj->o_ac * 20;
+				else
+					worth = 50;
+			}
 	    when STICK:
 		obj->o_flags |= ISKNOW;
 		ws_know[obj->o_which] = TRUE;
@@ -317,7 +321,7 @@ void total_winner()
     exit(0);
 }
 
-char * killname(register char monst)
+char * killname(char monst)
 {
     if (isupper(monst))
 	return monsters[monst-'A'].m_name;
@@ -325,11 +329,11 @@ char * killname(register char monst)
 	switch (monst)
 	{
 	    case 'a':
-		return "arrow";
+		return (char* ) "arrow";
 	    case 'd':
-		return "dart";
+		return (char* ) "dart";
 	    case 'b':
-		return "bolt";
+		return (char* ) "bolt";
 	}
-    return("");
+    return (char* ) ("");
 }

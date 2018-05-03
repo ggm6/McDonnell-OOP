@@ -18,8 +18,8 @@
 
 void whatis()
 {
-    register struct object *obj;
-    register struct linked_list *item;
+    struct object *obj;
+    struct linked_list *item;
 
     if ((item = get_item("identify", 0)) == NULL)
 	return;
@@ -70,9 +70,9 @@ void whatis()
 
 void create_obj()
 {
-    register struct linked_list *item;
-    register struct object *obj;
-    register char ch, bless;
+    struct linked_list *item;
+    struct object *obj;
+    char ch, bless;
 
     item = new_item(sizeof *obj);
     obj = (struct object *) ldata(item);
@@ -134,7 +134,7 @@ void create_obj()
 
 int teleport()
 {
-    register int rm;
+    int rm;
     coord c;
 
     c = hero;
@@ -169,7 +169,7 @@ int teleport()
 
 bool passwd()
 {
-    register char *sp, c;
+    char *sp, c;
     char buf[80];
     char * xcrypt(const char *key, const char *setting);
 

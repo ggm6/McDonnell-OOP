@@ -14,7 +14,7 @@
 
 #define	NUM_OPTS	(sizeof optlist / sizeof (OPTION))
 
-void strucpy(register char *s1, char *s2, register int len);
+void strucpy(char *s1, char *s2, int len);
 
 /*
  * description of an option and what to do with it
@@ -55,8 +55,8 @@ OPTION	optlist[] = {
  */
 void option()
 {
-    register OPTION	*op;
-    register int	retval;
+    OPTION	*op;
+    int	retval;
 
     wclear(hw);
     touchwin(hw);
@@ -136,8 +136,8 @@ int put_str() // OVERLOAD because I didn't understand how it's being used in opt
 
 int get_bool(bool *bp, WINDOW *win)
 {
-    register int oy, ox;
-    register bool op_bad;
+    int oy, ox;
+    bool op_bad;
 
     op_bad = TRUE;
     getyx(win, oy, ox);
@@ -181,8 +181,8 @@ int get_bool()
 {
 	bool *bp;
 	WINDOW *win;
-    register int oy, ox;
-    register bool op_bad;
+    int oy, ox;
+    bool op_bad;
 
     op_bad = TRUE;
     getyx(win, oy, ox);
@@ -225,10 +225,10 @@ int get_bool()
  * set a string option
  */
  
-int get_str(register char *opt, WINDOW *win)
+int get_str(char *opt, WINDOW *win)
 {
-    register char *sp;
-    register int c, oy, ox;
+    char *sp;
+    int c, oy, ox;
     char buf[80];
 
     draw(win);
@@ -246,7 +246,7 @@ int get_str(register char *opt, WINDOW *win)
 	{
 	    if (sp > buf)
 	    {
-		register int i;
+		int i;
 
 		sp--;
 		for (i = strlen(unctrl(*sp)); i; i--)
@@ -292,10 +292,10 @@ int get_str(register char *opt, WINDOW *win)
 
 int get_str()  // OVERLOAD because I didn't understand how it's being used in options.cpp
  {
-	 register char *opt;
+	 char *opt;
 	 WINDOW *win;
-	 register char *sp;
-    register int c, oy, ox;
+	 char *sp;
+    int c, oy, ox;
     char buf[80];
 
     draw(win);
@@ -313,7 +313,7 @@ int get_str()  // OVERLOAD because I didn't understand how it's being used in op
 	{
 	    if (sp > buf)
 	    {
-		register int i;
+		int i;
 
 		sp--;
 		for (i = strlen(unctrl(*sp)); i; i--)
@@ -365,11 +365,11 @@ int get_str()  // OVERLOAD because I didn't understand how it's being used in op
  * or the end of the entire option string.
  */
 
-void parse_opts(register char *str)
+void parse_opts(char *str)
 {
-    register char *sp;
-    register OPTION *op;
-    register int len;
+    char *sp;
+    OPTION *op;
+    int len;
 
     while (*str)
     {
@@ -389,7 +389,7 @@ void parse_opts(register char *str)
 		    *(bool *)op->o_opt = TRUE;
 		else				/* string option */
 		{
-		    register char *start;
+		    char *start;
 		    /*
 		     * Skip to start of string value
 		     */
@@ -435,9 +435,9 @@ void parse_opts(register char *str)
 /*
  * copy string using unctrl for things
  */
-void strucpy(register char *s1, char *s2, register int len)
+void strucpy(char *s1, char *s2, int len)
 {
-    register const char *sp;
+    const char *sp;
 
     while (len--)
     {

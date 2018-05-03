@@ -682,6 +682,7 @@ int rs_write_window(FILE *savef, WINDOW *win)
     for(row=0;row<height;row++)
         for(col=0;col<width;col++)
             rs_write_int(savef, mvwinch(win,row,col));
+    return 0;
 }
 
 int rs_read_window(int inf, WINDOW *win)
@@ -693,7 +694,7 @@ int rs_read_window(int inf, WINDOW *win)
 
     if (rs_read_int(inf, &id) != 0)
     {
-        if (id != RSID_WINDOW)
+        if (id != (int) RSID_WINDOW)
         {
             printf("Invalid head id. %x != %x(RSID_WINDOW)\n",
                 id,RSID_WINDOW);
@@ -784,7 +785,7 @@ int rs_read_daemons(int inf, struct delayed_action *d_list, int count)
     
     if (rs_read_int(inf, &id) != 0)
     {
-        if (id != RSID_DAEMONS)
+        if (id != (int) RSID_DAEMONS)
         {
             printf("Invalid id. %x != %x(RSID_DAEMONS)\n",
                 id,RSID_DAEMONS);
@@ -957,12 +958,12 @@ int rs_read_sticks(int inf)
         if (list == 0)
         {
             rs_read_string_index(inf,wood,NWOOD,&ws_made[i]);
-            ws_type[i] = "staff";
+            ws_type[i] = (char* ) "staff";
         }
         else 
         {
             rs_read_string_index(inf,metal,NMETAL,&ws_made[i]);
-            ws_type[i] = "wand";
+            ws_type[i] = (char* ) "wand";
         }
         rs_read_boolean(inf, &ws_know[i]);
         rs_read_new_string(inf, &ws_guess[i]);
@@ -1078,7 +1079,7 @@ int rs_read_object(int inf, struct object *o)
 
     if (rs_read_int(inf, &id) != 0)
     {
-        if (id != RSID_OBJECT)
+        if (id != (int) RSID_OBJECT)
         {
             printf("Invalid id. %x != %x(RSID_OBJECT)\n",
                 id,RSID_OBJECT);
@@ -1207,7 +1208,7 @@ int rs_read_traps(int inf, struct trap *trap, int count)
 
     if (rs_read_int(inf,&id) != 0)
     {
-        if (id != RSID_TRAP)
+        if (id != (int) RSID_TRAP)
         {
             printf("Invalid id. %x != %x(RSID_TRAP)\n",
                 id,RSID_TRAP);
@@ -1264,7 +1265,7 @@ int rs_read_monsters(int inf, struct monster *m, int count)
     
     if (rs_read_int(inf, &id) != 0)
     {
-        if (id != RSID_MONSTERS)
+        if (id != (int) RSID_MONSTERS)
         {
             printf("Invalid id. %x != %x(RSID_MONSTERS)\n",
                 id,RSID_MONSTERS);
@@ -1394,7 +1395,7 @@ int rs_read_thing(int inf, struct thing *t)
         
     if (rs_read_int(inf, &id) != 0)
     {
-        if (id != RSID_THING)
+        if (id != (int) RSID_THING)
             format_error = TRUE;
         else
         {
@@ -1485,7 +1486,7 @@ int rs_read_monster_list(int inf, struct linked_list **list)
 
     if (rs_read_int(inf,&id) != 0)
     {
-        if (id != RSID_MONSTERLIST)
+        if (id != (int) RSID_MONSTERLIST)
         {
             printf("Invalid id. %x != %x(RSID_MONSTERLIST)\n",
                 id,RSID_MONSTERLIST);
@@ -1543,7 +1544,7 @@ int rs_read_magic_items(int inf, struct magic_item *mi, int count)
 
     if (rs_read_int(inf, &id) != 0)
     {
-        if (id != RSID_MAGICITEMS)
+        if (id != (int) RSID_MAGICITEMS)
         {
             printf("Invalid id. %x != %x(RSID_MAGICITEMS)\n",
                 id,RSID_MAGICITEMS);

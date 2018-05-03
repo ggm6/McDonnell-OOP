@@ -68,32 +68,32 @@ struct trap  traps[MAXTRAPS];
 #define _x {1,1}
 struct monster monsters[26] = {
 	/* Name		 CARRY	FLAG    str, exp, lvl, amr, hpt, dmg */
-	{ "giant ant",	 0,	ISMEAN,	{ _x, 10,   2,   3, ___, "1d6" } },
-	{ "bat",	 0,	0,	{ _x,  1,   1,   3, ___, "1d2" } },
-	{ "centaur",	 15,	0,	{ _x, 15,   4,   4, ___, "1d6/1d6" } },
-	{ "dragon",	 100,	ISGREED,{ _x,9000, 10,  -1, ___, "1d8/1d8/3d10" } },
-	{ "floating eye",0,	0,	{ _x,  5,   1,   9, ___, "0d0" } },
-	{ "violet fungi",0,	ISMEAN,	{ _x, 85,   8,   3, ___, "000d0" } },
-	{ "gnome",	 10,	0,	{ _x,  8,   1,   5, ___, "1d6" } },
-	{ "hobgoblin",	 0,	ISMEAN,	{ _x,  3,   1,   5, ___, "1d8" } },
-	{ "invisible stalker",0,ISINVIS,{ _x,120,   8,   3, ___, "4d4" } },
-	{ "jackal",	 0,	ISMEAN,	{ _x,  2,   1,   7, ___, "1d2" } },
-	{ "kobold",	 0,	ISMEAN,	{ _x,  1,   1,   7, ___, "1d4" } },
-	{ "leprechaun",	 0,	0,	{ _x, 10,   3,   8, ___, "1d1" } },
-	{ "mimic",	 30,	0,	{ _x,140,   7,   7, ___, "3d4" } },
-	{ "nymph",	 100,	0,	{ _x, 40,   3,   9, ___, "0d0" } },
-	{ "orc",	 15,	ISBLOCK,{ _x,  5,   1,   6, ___, "1d8" } },
-	{ "purple worm", 70,	0,	{ _x,7000, 15,   6, ___, "2d12/2d4" } },
-	{ "quasit",	 30,	ISMEAN,	{ _x, 35,   3,   2, ___, "1d2/1d2/1d4" } },
-	{ "rust monster",0,	ISMEAN,	{ _x, 25,   5,   2, ___, "0d0/0d0" } },
-	{ "snake",	 0,	ISMEAN,	{ _x,  3,   1,   5, ___, "1d3" } },
-	{ "troll",	 50,	ISREGEN|ISMEAN,{ _x, 55,   6,   4, ___, "1d8/1d8/2d6" } },
-	{ "umber hulk",	 40,	ISMEAN,	{ _x,130,   8,   2, ___, "3d4/3d4/2d5" } },
-	{ "vampire",	 20,	ISREGEN|ISMEAN,{ _x,380,   8,   1, ___, "1d10" } },
-	{ "wraith",	 0,	0,	{ _x, 55,   5,   4, ___, "1d6" } },
-	{ "xorn",	 0,	ISMEAN,	{ _x,120,   7,  -2, ___, "1d3/1d3/1d3/4d6" } },
-	{ "yeti",	 30,	0,	{ _x, 50,   4,   6, ___, "1d6/1d6" } },
-	{ "zombie",	 0,	ISMEAN,	{ _x,  7,   2,   8, ___, "1d8" } }
+	{ (char* ) "giant ant",	 0,	ISMEAN,	{ _x, 10,   2,   3, ___, (char* ) "1d6" } },
+	{ (char* ) "bat",	 0,	0,	{ _x,  1,   1,   3, ___, (char* ) "1d2" } },
+	{ (char* ) "centaur",	 15,	0,	{ _x, 15,   4,   4, ___, (char* ) "1d6/1d6" } },
+	{ (char* ) "dragon",	 100,	ISGREED,{ _x,9000, 10,  -1, ___, (char* ) "1d8/1d8/3d10" } },
+	{ (char* ) "floating eye",0,	0,	{ _x,  5,   1,   9, ___, (char* )"0d0" } },
+	{ (char* ) "violet fungi",0,	ISMEAN,	{ _x, 85,   8,   3, ___, (char* )"000d0" } },
+	{ (char* ) "gnome",	 10,	0,	{ _x,  8,   1,   5, ___, (char* )"1d6" } },
+	{ (char* ) "hobgoblin",	 0,	ISMEAN,	{ _x,  3,   1,   5, ___, (char* )"1d8" } },
+	{ (char* )"invisible stalker",0,ISINVIS,{ _x,120,   8,   3, ___, (char* ) "4d4" } },
+	{ (char* ) "jackal",	 0,	ISMEAN,	{ _x,  2,   1,   7, ___, (char* ) "1d2" } },
+	{ (char* )"kobold",	 0,	ISMEAN,	{ _x,  1,   1,   7, ___, (char* ) "1d4" } },
+	{ (char* ) "leprechaun",	 0,	0,	{ _x, 10,   3,   8, ___, (char* )"1d1" } },
+	{ (char* )"mimic",	 30,	0,	{ _x,140,   7,   7, ___, (char* ) "3d4" } },
+	{ (char* ) "nymph",	 100,	0,	{ _x, 40,   3,   9, ___, (char* ) "0d0" } },
+	{ (char* ) "orc",	 15,	ISBLOCK,{ _x,  5,   1,   6, ___, (char* )"1d8" } },
+	{ (char* ) "purple worm", 70,	0,	{ _x,7000, 15,   6, ___, (char* ) "2d12/2d4" } },
+	{ (char* )"quasit",	 30,	ISMEAN,	{ _x, 35,   3,   2, ___, (char* ) "1d2/1d2/1d4" } },
+	{ (char* ) "rust monster",0,	ISMEAN,	{ _x, 25,   5,   2, ___, (char* ) "0d0/0d0" } },
+	{ (char* ) "snake",	 0,	ISMEAN,	{ _x,  3,   1,   5, ___, (char* )"1d3" } },
+	{ (char* ) "troll",	 50,	ISREGEN|ISMEAN,{ _x, 55,   6,   4, ___, (char* ) "1d8/1d8/2d6" } },
+	{ (char* )"umber hulk",	 40,	ISMEAN,	{ _x,130,   8,   2, ___, (char* ) "3d4/3d4/2d5" } },
+	{ (char* ) "vampire",	 20,	ISREGEN|ISMEAN,{ _x,380,   8,   1, ___, (char* ) "1d10" } },
+	{ (char* ) "wraith",	 0,	0,	{ _x, 55,   5,   4, ___, (char* ) "1d6" } },
+	{ (char* ) "xorn",	 0,	ISMEAN,	{ _x,120,   7,  -2, ___, (char* ) "1d3/1d3/1d3/4d6" } },
+	{ (char* ) "yeti",	 30,	0,	{ _x, 50,   4,   6, ___, (char* ) "1d6/1d6" } },
+	{ (char* ) "zombie",	 0,	ISMEAN,	{ _x,  7,   2,   8, ___, (char* ) "1d8" } }
 };
 #undef ___
 
@@ -238,82 +238,82 @@ struct words metal[NMETAL] = {
 };
 
 struct magic_item things[NUMTHINGS] = {
-    { "",			27 },	/* potion */
-    { "",			27 },	/* scroll */
-    { "",			18 },	/* food */
-    { "",			 9 },	/* weapon */
-    { "",			 9 },	/* armor */
-    { "",			 5 },	/* ring */
-    { "",			 5 },	/* stick */
+    { (char* ) "",			27 },	/* potion */
+    { (char* ) "",			27 },	/* scroll */
+    { (char* ) "",			18 },	/* food */
+    { (char* ) "",			 9 },	/* weapon */
+    { (char* ) "",			 9 },	/* armor */
+    { (char* ) "",			 5 },	/* ring */
+    { (char* ) "",			 5 },	/* stick */
 };
 
 struct magic_item s_magic[MAXSCROLLS] = {
-    { "monster confusion",	 8, 170 },
-    { "magic mapping",		 5, 180 },
-    { "light",			10, 100 },
-    { "hold monster",		 2, 200 },
-    { "sleep",			 5,  50 },
-    { "enchant armor",		 8, 130 },
-    { "identify",		21, 100 },
-    { "scare monster",		 4, 180 },
-    { "gold detection",		 4, 110 },
-    { "teleportation",		 7, 175 },
-    { "enchant weapon",		10, 150 },
-    { "create monster",		 5,  75 },
-    { "remove curse",		 8, 105 },
-    { "aggravate monsters",	 1,  60 },
-    { "blank paper",		 1,  50 },
-    { "genocide",		 1, 200 },
+    { (char* ) "monster confusion",	 8, 170 },
+    { (char* ) "magic mapping",		 5, 180 },
+    { (char* ) "light",			10, 100 },
+    { (char* ) "hold monster",		 2, 200 },
+    { (char* ) "sleep",			 5,  50 },
+    { (char* ) "enchant armor",		 8, 130 },
+    { (char* ) "identify",		21, 100 },
+    { (char* ) "scare monster",		 4, 180 },
+    { (char* ) "gold detection",		 4, 110 },
+    { (char* ) "teleportation",		 7, 175 },
+    { (char* ) "enchant weapon",		10, 150 },
+    { (char* ) "create monster",		 5,  75 },
+    { (char* ) "remove curse",		 8, 105 },
+    { (char* ) "aggravate monsters",	 1,  60 },
+    { (char* ) "blank paper",		 1,  50 },
+    { (char* ) "genocide",		 1, 200 },
 };
 
 struct magic_item p_magic[MAXPOTIONS] = {
-    { "confusion",		 8,  50 },
-    { "paralysis",		10,  50 },
-    { "poison",			 8,  50 },
-    { "gain strength",		15, 150 },
-    { "see invisible",		 2, 170 },
-    { "healing",		15, 130 },
-    { "monster detection",	 6, 120 },
-    { "magic detection",	 6, 105 },
-    { "raise level",		 2, 220 },
-    { "extra healing",		 5, 180 },
-    { "haste self",		 4, 200 },
-    { "restore strength",	14, 120 },
-    { "blindness",		 4,  50 },
-    { "thirst quenching",	 1,  50 },
+    { (char* ) "confusion",		 8,  50 },
+    { (char* ) "paralysis",		10,  50 },
+    { (char* ) "poison",			 8,  50 },
+    { (char* ) "gain strength",		15, 150 },
+    { (char* ) "see invisible",		 2, 170 },
+    { (char* ) "healing",		15, 130 },
+    { (char* ) "monster detection",	 6, 120 },
+    { (char* ) "magic detection",	 6, 105 },
+    { (char* ) "raise level",		 2, 220 },
+    { (char* ) "extra healing",		 5, 180 },
+    { (char* ) "haste self",		 4, 200 },
+    { (char* ) "restore strength",	14, 120 },
+    { (char* ) "blindness",		 4,  50 },
+    { (char* ) "thirst quenching",	 1,  50 },
 };
 
 struct magic_item r_magic[MAXRINGS] = {
-    { "protection",		 9, 200 },
-    { "add strength",		 9, 200 },
-    { "sustain strength",	 5, 180 },
-    { "searching",		10, 200 },
-    { "see invisible",		10, 175 },
-    { "adornment",		 1, 100 },
-    { "aggravate monster",	11, 100 },
-    { "dexterity",		 8, 220 },
-    { "increase damage",	 8, 220 },
-    { "regeneration",		 4, 260 },
-    { "slow digestion",		 9, 240 },
-    { "telportation",		 9, 100 },
-    { "stealth",		 7, 100 },
+    { (char* ) "protection",		 9, 200 },
+    { (char* ) "add strength",		 9, 200 },
+    { (char* ) "sustain strength",	 5, 180 },
+    { (char* ) "searching",		10, 200 },
+    { (char* ) "see invisible",		10, 175 },
+    { (char* ) "adornment",		 1, 100 },
+    { (char* ) "aggravate monster",	11, 100 },
+    { (char* ) "dexterity",		 8, 220 },
+    { (char* ) "increase damage",	 8, 220 },
+    { (char* ) "regeneration",		 4, 260 },
+    { (char* ) "slow digestion",		 9, 240 },
+    { (char* ) "telportation",		 9, 100 },
+    { (char* ) "stealth",		 7, 100 },
 };
 
 struct magic_item ws_magic[MAXSTICKS] = {
-    { "light",			12, 120 },
-    { "striking",		 9, 115 },
-    { "lightning",		 3, 200 },
-    { "fire",			 3, 200 },
-    { "cold",			 3, 200 },
-    { "polymorph",		15, 210 },
-    { "magic missile",		10, 170 },
-    { "haste monster",		 9,  50 },
-    { "slow monster",		11, 220 },
-    { "drain life",		 9, 210 },
-    { "nothing",		 1,  70 },
-    { "teleport away",		 5, 140 },
-    { "teleport to",		 5,  60 },
-    { "cancellation",		 5, 130 },
+    { (char* ) "light",			12, 120 },
+    { (char* ) "striking",		 9, 115 },
+    { (char* ) "lightning",		 3, 200 },
+    { (char* ) "fire",			 3, 200 },
+    { (char* ) "cold",			 3, 200 },
+    { (char* ) "polymorph",		15, 210 },
+    { (char* ) "magic missile",		10, 170 },
+    { (char* ) "haste monster",		 9,  50 },
+    { (char* ) "slow monster",		11, 220 },
+    { (char* ) "drain life",		 9, 210 },
+    { (char* ) "nothing",		 1,  70 },
+    { (char* )"teleport away",		 5, 140 },
+    { (char* )"teleport to",		 5,  60 },
+    { (char* ) "cancellation",		 5, 130 },
 };
 
 int a_class[MAXARMORS] = {
@@ -328,14 +328,14 @@ int a_class[MAXARMORS] = {
 };
 
 char *a_names[MAXARMORS] = {
-    "leather armor",
-    "ring mail",
-    "studded leather armor",
-    "scale mail",
-    "chain mail",
-    "splint mail",
-    "banded mail",
-    "plate mail",
+    (char* ) "leather armor",
+    (char* ) "ring mail",
+    (char* ) "studded leather armor",
+    (char* ) "scale mail",
+    (char* ) "chain mail",
+    (char* ) "splint mail",
+    (char* ) "banded mail",
+    (char* ) "plate mail",
 };
 
 int a_chances[MAXARMORS] = {
@@ -355,11 +355,11 @@ int a_chances[MAXARMORS] = {
  */
 void init_things()
 {
-    register struct magic_item *mp;
+    struct magic_item *mp;
 
     for (mp = &things[1]; mp <= &things[NUMTHINGS-1]; mp++)
 	mp->mi_prob += (mp-1)->mi_prob;
-    badcheck("things", things, NUMTHINGS);
+    badcheck((char* ) "things", things, NUMTHINGS);
 }
 
 /*
@@ -369,8 +369,8 @@ void init_things()
 
 void init_colors()
 {
-    register int i;
-    register char *str;
+    int i;
+    char *str;
 
     for (i = 0; i < MAXPOTIONS; i++)
     {
@@ -384,7 +384,7 @@ void init_colors()
 	if (i > 0)
 		p_magic[i].mi_prob += p_magic[i-1].mi_prob;
     }
-    badcheck("potions", p_magic, MAXPOTIONS);
+    badcheck((char* ) "potions", p_magic, MAXPOTIONS);
 }
 
 /*
@@ -394,9 +394,9 @@ void init_colors()
 
 void init_names()
 {
-    register int nsyl;
-    register char *cp, *sp;
-    register int i, nwords;
+    int nsyl;
+    char *cp, *sp;
+    int i, nwords;
 
     for (i = 0; i < MAXSCROLLS; i++)
     {
@@ -421,7 +421,7 @@ void init_names()
 	if (i > 0)
 		s_magic[i].mi_prob += s_magic[i-1].mi_prob;
     }
-    badcheck("scrolls", s_magic, MAXSCROLLS);
+    badcheck((char* ) "scrolls", s_magic, MAXSCROLLS);
 }
 
 /*
@@ -431,8 +431,8 @@ void init_names()
 
 void init_stones()
 {
-    register int i;
-    register char *str;
+    int i;
+    char *str;
 
     for (i = 0; i < MAXRINGS; i++)
     {
@@ -446,7 +446,7 @@ void init_stones()
 	if (i > 0)
 		r_magic[i].mi_prob += r_magic[i-1].mi_prob;
     }
-    badcheck("rings", r_magic, MAXRINGS);
+    badcheck((char* ) "rings", r_magic, MAXRINGS);
 }
 
 /*
@@ -456,8 +456,8 @@ void init_stones()
 
 void init_materials()
 {
-    register int i;
-    register char *str;
+    int i;
+    char *str;
 
     for (i = 0; i < MAXSTICKS; i++)
     {
@@ -466,13 +466,13 @@ void init_materials()
 	    {
 		str = metal[rnd(NMETAL)].w_string;
 		if (isupper(*str))
-			ws_type[i] = "wand";
+			ws_type[i] = (char* ) (char* ) "wand";
 	    }
 	    else
 	    {
 		str = wood[rnd(NWOOD)].w_string;
 		if (isupper(*str))
-			ws_type[i] = "staff";
+			ws_type[i] = (char* ) "staff";
 	    }
 	until (isupper(*str));
 	*str = tolower(*str);
@@ -482,12 +482,12 @@ void init_materials()
 	if (i > 0)
 		ws_magic[i].mi_prob += ws_magic[i-1].mi_prob;
     }
-    badcheck("sticks", ws_magic, MAXSTICKS);
+    badcheck((char* ) "sticks", ws_magic, MAXSTICKS);
 }
 
-void badcheck(char *name, register struct magic_item *magic, register int bound)
+void badcheck(char *name, struct magic_item *magic, int bound)
 {
-    register struct magic_item *end;
+    struct magic_item *end;
 
     if (magic[bound - 1].mi_prob == 100)
 	return;
@@ -501,50 +501,50 @@ void badcheck(char *name, register struct magic_item *magic, register int bound)
 }
 
 struct h_list helpstr[] = {
-    '?',	"	prints help",
-    '/',	"	identify object",
-    'h',	"	left",
-    'j',	"	down",
-    'k',	"	up",
-    'l',	"	right",
-    'y',	"	up & left",
-    'u',	"	up & right",
-    'b',	"	down & left",
-    'n',	"	down & right",
-    'H',	"	run left",
-    'J',	"	run down",
-    'K',	"	run up",
-    'L',	"	run right",
-    'Y',	"	run up & left",
-    'U',	"	run up & right",
-    'B',	"	run down & left",
-    'N',	"	run down & right",
-    't',	"<dir>	throw something",
-    'f',	"<dir>	forward until find something",
-    'p',	"<dir>	zap a wand in a direction",
-    'z',	"	zap a wand or staff",
-    '>',	"	go down a staircase",
-    's',	"	search for trap/secret door",
-    ' ',	"	(space) rest for a while",
-    'i',	"	inventory",
-    'I',	"	inventory single item",
-    'q',	"	quaff potion",
-    'r',	"	read paper",
-    'e',	"	eat food",
-    'w',	"	wield a weapon",
-    'W',	"	wear armor",
-    'T',	"	take armor off",
-    'P',	"	put on ring",
-    'R',	"	remove ring",
-    'd',	"	drop object",
-    'c',	"	call object",
-    'o',	"	examine/set options",
-    CTRL('L'),	"	redraw screen",
-    CTRL('R'),	"	repeat last message",
-    ESCAPE,	"	cancel command",
-    'v',	"	print program version number",
-    '!',	"	shell escape",
-    'S',	"	save game",
-    'Q',	"	quit",
+    '?',	(char* ) "	prints help",
+    '/',	(char* ) "	identify object",
+    'h',	(char* ) "	left",
+    'j',	(char* ) "	down",
+    'k',	(char* ) "	up",
+    'l',	(char* ) "	right",
+    'y',	(char* ) "	up & left",
+    'u',	(char* ) "	up & right",
+    'b',	(char* ) "	down & left",
+    'n',	(char* ) "	down & right",
+    'H',	(char* ) "	run left",
+    'J',	(char* ) "	run down",
+    'K',	(char* ) "	run up",
+    'L',	(char* ) "	run right",
+    'Y',	(char* ) "	run up & left",
+    'U',	(char* ) "	run up & right",
+    'B',	(char* ) "	run down & left",
+    'N',	(char* ) "	run down & right",
+    't',	(char* ) "<dir>	throw something",
+    'f',	(char* ) "<dir>	forward until find something",
+    'p',	(char* ) "<dir>	zap a wand in a direction",
+    'z',	(char* ) "	zap a wand or staff",
+    '>',	(char* ) "	go down a staircase",
+    's',	(char* ) "	search for trap/secret door",
+    ' ',	(char* ) "	(space) rest for a while",
+    'i',	(char* ) "	inventory",
+    'I',	(char* ) "	inventory single item",
+    'q',	(char* ) "	quaff potion",
+    'r',	(char* ) "	read paper",
+    'e',	(char* ) "	eat food",
+    'w',	(char* ) "	wield a weapon",
+    'W',	(char* ) "	wear armor",
+    'T',	(char* ) "	take armor off",
+    'P',	(char* ) "	put on ring",
+    'R',	(char* ) "	remove ring",
+    'd',	(char* ) "	drop object",
+    'c',	(char* ) "	call object",
+    'o',	(char* ) "	examine/set options",
+    CTRL('L'),	(char* ) "	redraw screen",
+    CTRL('R'),	(char* ) "	repeat last message",
+    ESCAPE,	(char* ) "	cancel command",
+    'v',	(char* ) "	print program version number",
+    '!',	(char* ) "	shell escape",
+    'S',	(char* ) "	save game",
+    'Q',	(char* ) "	quit",
     0, 0
 };
